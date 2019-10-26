@@ -48,7 +48,7 @@ public class Co2DataResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/co-2-data")
-    public ResponseEntity<Co2Data> createCo2Data(@RequestParam String co2Data) throws URISyntaxException {
+    public ResponseEntity<Co2Data> createCo2Data(@RequestBody String co2Data) throws URISyntaxException {
         log.debug("REST request to save Co2Data : {}", co2Data);
 
         /*if (co2Data.getId() != null) {
