@@ -7,7 +7,7 @@ import java.util.Arrays;
 
 public class BankDataAdapter {
 
-        public ResponseEntity<String>  requestFlightData(){
+        public ResponseEntity<String>  requestBankData(){
         String uri = "https://simulator-api.db.com:443/gw/dbapi/banking/transactions/v1/?iban=DE10010000000000005341";
 
         RestTemplate restTemplate = new RestTemplate();

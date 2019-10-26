@@ -7,7 +7,7 @@ import org.springframework.web.client.RestTemplate;
 
 public class FlightDataAdapter {
 
-        public ResponseEntity<String>  requestFlightData(String amsId){
+        public ResponseEntity<String>  requestCarData(String amsId){
         String uri = "http://fsg-datahub.azure-api.net/legacy/Apps/AirportSTR/Flights/Get/";
         uri = uri + amsId;
 
