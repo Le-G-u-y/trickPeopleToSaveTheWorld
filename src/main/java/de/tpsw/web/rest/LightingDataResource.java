@@ -46,15 +46,14 @@ public class LightingDataResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/lighting-data")
-    public ResponseEntity<LightingData> createLightingData(@RequestBody LightingData lightingData) throws URISyntaxException {
+    public ResponseEntity<LightingData> createLightingData(@RequestBody String lightingData) throws URISyntaxException {
         log.debug("REST request to save LightingData : {}", lightingData);
-        if (lightingData.getId() != null) {
-            throw new BadRequestAlertException("A new lightingData cannot already have an ID", ENTITY_NAME, "idexists");
-        }
-        LightingData result = lightingDataService.save(lightingData);
+       
+        /*LightingData result = lightingDataService.save(lightingData);
         return ResponseEntity.created(new URI("/api/lighting-data/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
-            .body(result);
+            .body(result);*/
+        return null;
     }
 
     /**
