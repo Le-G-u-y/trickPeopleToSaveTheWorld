@@ -6,9 +6,12 @@ import de.tpsw.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
+import jdk.nashorn.internal.parser.JSONParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.configurationprocessor.json.JSONException;
+import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,20 +45,37 @@ public class Co2DataResource {
     /**
      * {@code POST  /co-2-data} : Create a new co2Data.
      *
-     * @param co2Data the co2Data to create.
+     * @param co2DataJsonString the co2Data to create.
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new co2Data, or with status {@code 400 (Bad Request)} if the co2Data has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/co-2-data")
-    public ResponseEntity<Co2Data> createCo2Data(@Valid @RequestBody Co2Data co2Data) throws URISyntaxException {
-        log.debug("REST request to save Co2Data : {}", co2Data);
-        if (co2Data.getId() != null) {
-            throw new BadRequestAlertException("A new co2Data cannot already have an ID", ENTITY_NAME, "idexists");
+    public ResponseEntity<Co2Data> createCo2Data(@RequestBody String co2DataJsonString) throws URISyntaxException {
+        log.debug("REST request to save Co2Data : {}", co2DataJsonString);
+        Co2Data result = null;
+        try {
+            JSONObject jsonObject = new JSONObject(co2DataJsonString);
+
+            Co2Data co2Data = new Co2Data();
+            Object co2 = jsonObject.get("co2");
+            Object hum = jsonObject.get("hum");
+            Object temp = jsonObject.get("temp");
+            if (co2 != null && hum != null && temp != null) {
+                co2Data.setCo2Value((Integer) co2);
+                co2Data.setHumidity(((Double) hum).floatValue());
+                co2Data.setTemp(((Double) temp).floatValue());
+                result = co2DataService.save(co2Data);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
-        Co2Data result = co2DataService.save(co2Data);
-        return ResponseEntity.created(new URI("/api/co-2-data/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
-            .body(result);
+        if (result != null) {
+            return ResponseEntity.created(new URI("/api/co-2-data/" + result.getId()))
+                .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
+                .body(result);
+        }
+        return null;
+
     }
 
     /**
@@ -82,7 +102,6 @@ public class Co2DataResource {
     /**
      * {@code GET  /co-2-data} : get all the co2Data.
      *
-
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of co2Data in body.
      */
     @GetMapping("/co-2-data")

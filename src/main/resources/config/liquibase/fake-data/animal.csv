@@ -1,11 +1,5 @@
 id;name;animal_type;max_health;current_health;creation_date;happiness;death_notified
-1;Multi-channelled Licensed;CHICKEN;59241;46676;2019-10-26;true;true
-2;Table Small Frozen Sausages Planner;CHICKEN;24102;44015;2019-10-26;false;true
-3;backing up Salad;COW;31171;42515;2019-10-26;false;true
-4;Chair Facilitator;PIG;72727;92187;2019-10-26;false;true
-5;Aruba;CHICKEN;82873;58675;2019-10-26;true;false
-6;Faroe Islands Plastic;CHICKEN;39488;19871;2019-10-26;false;false
-7;magenta monitor 1080p;CHICKEN;86310;85003;2019-10-26;false;false
-8;Fantastic Plastic Chicken;COW;59129;63755;2019-10-26;true;true
-9;embrace Developer;COW;49379;4043;2019-10-26;true;false
-10;Grocery;CHICKEN;89576;63641;2019-10-26;false;true
+1;Emma;COW;5;5;2019-10-26;true;false
+2;Jumpy;CHICKEN;5;5;2019-10-25;true;false
+3;Haribart;PIG;5;5;2019-10-26;true;false
+4;Grunty;PIG;2;5;2019-10-26;false;false
