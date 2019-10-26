@@ -92,7 +92,7 @@ public class PlanetService {
             brandNewBaby.setCreationDate(LocalDate.now());
             brandNewBaby.setHappiness(true);
             brandNewBaby.setDeathNotified(false);
-            brandNewBaby.setPlanet(planet);
+            // brandNewBaby.setPlanet(planet);
 
             // persist
             animalService.save(brandNewBaby);
