@@ -15,6 +15,14 @@ import { RouterModule } from '@angular/router';
       {
         path: 'planet',
         loadChildren: () => import('./planet/planet.module').then(m => m.TrickPeopleToSaveTheWorldPlanetModule)
+      },
+      {
+        path: 'lighting-data',
+        loadChildren: () => import('./lighting-data/lighting-data.module').then(m => m.TrickPeopleToSaveTheWorldLightingDataModule)
+      },
+      {
+        path: 'co-2-data',
+        loadChildren: () => import('./co-2-data/co-2-data.module').then(m => m.TrickPeopleToSaveTheWorldCo2DataModule)
       }
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ])

@@ -1,0 +1,31 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="lightingData">
+            <h2><span jhiTranslate="trickPeopleToSaveTheWorldApp.lightingData.detail.title">Lighting Data</span> {{lightingData.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="trickPeopleToSaveTheWorldApp.lightingData.onSeconds">On Seconds</span></dt>
+                <dd>
+                    <span>{{lightingData.onSeconds}}</span>
+                </dd>
+                <dt><span jhiTranslate="trickPeopleToSaveTheWorldApp.lightingData.offSeconds">Off Seconds</span></dt>
+                <dd>
+                    <span>{{lightingData.offSeconds}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/lighting-data', lightingData.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

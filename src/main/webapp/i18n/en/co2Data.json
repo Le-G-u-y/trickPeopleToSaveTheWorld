@@ -1,0 +1,25 @@
+{
+  "trickPeopleToSaveTheWorldApp": {
+    "co2Data": {
+      "home": {
+        "title": "Co 2 Data",
+        "createLabel": "Create a new Co 2 Data",
+        "createOrEditLabel": "Create or edit a Co 2 Data",
+        "notFound": "No Co 2 Data found"
+      },
+      "created": "A new Co 2 Data is created with identifier {{ param }}",
+      "updated": "A Co 2 Data is updated with identifier {{ param }}",
+      "deleted": "A Co 2 Data is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Co 2 Data {{ id }}?"
+      },
+      "detail": {
+        "title": "Co 2 Data"
+      },
+      "timestamp": "Timestamp",
+      "co2Value": "Co 2 Value",
+      "temp": "Temp",
+      "humidity": "Humidity"
+    }
+  }
+}

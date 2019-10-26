@@ -48,6 +48,8 @@ public class CacheConfiguration {
             createCache(cm, de.tpsw.domain.Planet.class.getName());
             createCache(cm, de.tpsw.domain.Planet.class.getName() + ".animals");
             createCache(cm, de.tpsw.domain.Planet.class.getName() + ".achievements");
+            createCache(cm, de.tpsw.domain.LightingData.class.getName());
+            createCache(cm, de.tpsw.domain.Co2Data.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }
