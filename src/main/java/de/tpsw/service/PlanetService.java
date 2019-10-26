@@ -1,5 +1,6 @@
 package de.tpsw.service;
 
+import de.tpsw.domain.Animal;
 import de.tpsw.domain.Planet;
 import de.tpsw.repository.PlanetRepository;
 import org.slf4j.Logger;
@@ -28,6 +29,10 @@ public class PlanetService {
         this.planetRepository = planetRepository;
     }
 
+    final static Integer DIET_VEGAN = 0;
+    final static Integer DIET_VEGETARIAN = 1;
+    final static Integer DIET_MEAT = 2;
+
     /**
      * Save a planet.
      *
@@ -36,6 +41,44 @@ public class PlanetService {
      */
     public Planet save(Planet planet) {
         log.debug("Request to save Planet : {}", planet);
+        return planetRepository.save(planet);
+    }
+
+    /**
+     * Update current Victim
+     *
+     * @param planetId the entity to save.
+     * @return the persisted entity.
+     */
+    public Planet updateCurrentVictim(Long planetId, Integer dietType) {
+        log.debug("Request to save Planet : {} and dietType: {}", planetId, dietType);
+
+        // Get current victim
+        Planet planet =  findOne(planetId).get();
+
+        // Calculate conseuqences on victim animal
+        // vegan:       +3
+        // vegetarian:  +1
+        // meeat:       -1
+        Animal currentVictim = planet.getCurrentVictimAnimal();
+        Integer healthDiff;
+
+        if(DIET_VEGAN.equals(dietType)){
+            healthDiff = 3;
+        }
+        else if(DIET_VEGETARIAN.equals(dietType)){
+            healthDiff = 1;
+        }
+        else if(DIET_MEAT.equals(dietType)){
+            healthDiff = -1;
+        } else {
+            //HACK
+            healthDiff = 0;
+        }
+        currentVictim.setCurrentHealth(currentVictim.getCurrentHealth() + healthDiff);
+
+        // Victim dead? => UI will inform the user
+
         return planetRepository.save(planet);
     }
 
@@ -58,7 +101,7 @@ public class PlanetService {
     public Page<Planet> findAllWithEagerRelationships(Pageable pageable) {
         return planetRepository.findAllWithEagerRelationships(pageable);
     }
-    
+
 
     /**
      * Get one planet by id.
@@ -81,4 +124,6 @@ public class PlanetService {
         log.debug("Request to delete Planet : {}", id);
         planetRepository.deleteById(id);
     }
+
+
 }

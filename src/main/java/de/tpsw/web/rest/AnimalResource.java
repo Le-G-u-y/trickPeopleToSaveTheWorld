@@ -104,6 +104,12 @@ public class AnimalResource {
         return ResponseUtil.wrapOrNotFound(animal);
     }
 
+    @GetMapping("/deadUnnotifiedAnimal")
+    public Animal getDeadUnnotifiedAnimal() {
+        log.debug("REST request to get first dead Animal.");
+        return animalService.findDeadUnnotified();
+    }
+
     /**
      * {@code DELETE  /animals/:id} : delete the "id" animal.
      *
