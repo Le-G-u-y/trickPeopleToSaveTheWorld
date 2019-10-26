@@ -6,29 +6,37 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
+import * as moment from 'moment';
 import { JhiAlertService } from 'ng-jhipster';
-import { IAchievement, Achievement } from 'app/shared/model/achievement.model';
-import { AchievementService } from './achievement.service';
+import { IAnimal, Animal } from 'app/shared/model/animal.model';
+import { AnimalService } from './animal.service';
 import { IPlanet } from 'app/shared/model/planet.model';
 import { PlanetService } from 'app/entities/planet/planet.service';
 
 @Component({
-  selector: 'jhi-achievement-update',
-  templateUrl: './achievement-update.component.html'
+  selector: 'jhi-animal-update',
+  templateUrl: './animal-update.component.html'
 })
-export class AchievementUpdateComponent implements OnInit {
+export class AnimalUpdateComponent implements OnInit {
   isSaving: boolean;
 
   planets: IPlanet[];
+  creationDateDp: any;
 
   editForm = this.fb.group({
     id: [],
-    name: [null, [Validators.required]]
+    name: [],
+    animalType: [null, [Validators.required]],
+    maxHealth: [null, [Validators.required]],
+    currentHealth: [null, [Validators.required]],
+    creationDate: [],
+    happiness: [null, [Validators.required]],
+    planet: []
   });
 
   constructor(
     protected jhiAlertService: JhiAlertService,
-    protected achievementService: AchievementService,
+    protected animalService: AnimalService,
     protected planetService: PlanetService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
@@ -36,8 +44,8 @@ export class AchievementUpdateComponent implements OnInit {
 
   ngOnInit() {
     this.isSaving = false;
-    this.activatedRoute.data.subscribe(({ achievement }) => {
-      this.updateForm(achievement);
+    this.activatedRoute.data.subscribe(({ animal }) => {
+      this.updateForm(animal);
     });
     this.planetService
       .query()
@@ -48,10 +56,16 @@ export class AchievementUpdateComponent implements OnInit {
       .subscribe((res: IPlanet[]) => (this.planets = res), (res: HttpErrorResponse) => this.onError(res.message));
   }
 
-  updateForm(achievement: IAchievement) {
+  updateForm(animal: IAnimal) {
     this.editForm.patchValue({
-      id: achievement.id,
-      name: achievement.name
+      id: animal.id,
+      name: animal.name,
+      animalType: animal.animalType,
+      maxHealth: animal.maxHealth,
+      currentHealth: animal.currentHealth,
+      creationDate: animal.creationDate,
+      happiness: animal.happiness,
+      planet: animal.planet
     });
   }
 
@@ -61,23 +75,29 @@ export class AchievementUpdateComponent implements OnInit {
 
   save() {
     this.isSaving = true;
-    const achievement = this.createFromForm();
-    if (achievement.id !== undefined) {
-      this.subscribeToSaveResponse(this.achievementService.update(achievement));
+    const animal = this.createFromForm();
+    if (animal.id !== undefined) {
+      this.subscribeToSaveResponse(this.animalService.update(animal));
     } else {
-      this.subscribeToSaveResponse(this.achievementService.create(achievement));
+      this.subscribeToSaveResponse(this.animalService.create(animal));
     }
   }
 
-  private createFromForm(): IAchievement {
+  private createFromForm(): IAnimal {
     return {
-      ...new Achievement(),
+      ...new Animal(),
       id: this.editForm.get(['id']).value,
-      name: this.editForm.get(['name']).value
+      name: this.editForm.get(['name']).value,
+      animalType: this.editForm.get(['animalType']).value,
+      maxHealth: this.editForm.get(['maxHealth']).value,
+      currentHealth: this.editForm.get(['currentHealth']).value,
+      creationDate: this.editForm.get(['creationDate']).value,
+      happiness: this.editForm.get(['happiness']).value,
+      planet: this.editForm.get(['planet']).value
     };
   }
 
-  protected subscribeToSaveResponse(result: Observable<HttpResponse<IAchievement>>) {
+  protected subscribeToSaveResponse(result: Observable<HttpResponse<IAnimal>>) {
     result.subscribe(() => this.onSaveSuccess(), () => this.onSaveError());
   }
 
@@ -95,16 +115,5 @@ export class AchievementUpdateComponent implements OnInit {
 
   trackPlanetById(index: number, item: IPlanet) {
     return item.id;
-  }
-
-  getSelected(selectedVals: any[], option: any) {
-    if (selectedVals) {
-      for (let i = 0; i < selectedVals.length; i++) {
-        if (option.id === selectedVals[i].id) {
-          return selectedVals[i];
-        }
-      }
-    }
-    return option;
   }
 }

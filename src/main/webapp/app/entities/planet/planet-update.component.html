@@ -1,0 +1,75 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-planet-heading" jhiTranslate="trickPeopleToSaveTheWorldApp.planet.home.createOrEditLabel">Create or edit a Planet</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!editForm.get('id').value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="trickPeopleToSaveTheWorldApp.planet.forestPoints" for="field_forestPoints">Forest Points</label>
+                    <input type="number" class="form-control" name="forestPoints" id="field_forestPoints"
+                           formControlName="forestPoints"/>
+                    <div *ngIf="editForm.get('forestPoints').invalid && (editForm.get('forestPoints').dirty || editForm.get('forestPoints').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('forestPoints').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('forestPoints')?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="trickPeopleToSaveTheWorldApp.planet.waterPoints" for="field_waterPoints">Water Points</label>
+                    <input type="number" class="form-control" name="waterPoints" id="field_waterPoints"
+                           formControlName="waterPoints"/>
+                    <div *ngIf="editForm.get('waterPoints').invalid && (editForm.get('waterPoints').dirty || editForm.get('waterPoints').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('waterPoints').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('waterPoints')?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="trickPeopleToSaveTheWorldApp.planet.smogPoints" for="field_smogPoints">Smog Points</label>
+                    <input type="number" class="form-control" name="smogPoints" id="field_smogPoints"
+                           formControlName="smogPoints"/>
+                    <div *ngIf="editForm.get('smogPoints').invalid && (editForm.get('smogPoints').dirty || editForm.get('smogPoints').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('smogPoints').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('smogPoints')?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label jhiTranslate="trickPeopleToSaveTheWorldApp.planet.achievement" for="field_achievements">Achievement</label>
+                    <select class="form-control" id="field_achievements" multiple name="achievements" formControlName="achievements">
+                        <option [ngValue]="getSelected(editForm.get('achievements').value, achievementOption)" *ngFor="let achievementOption of achievements; trackBy: trackAchievementById">{{achievementOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

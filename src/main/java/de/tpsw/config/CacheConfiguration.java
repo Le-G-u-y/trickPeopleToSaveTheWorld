@@ -43,6 +43,11 @@ public class CacheConfiguration {
             createCache(cm, de.tpsw.domain.Authority.class.getName());
             createCache(cm, de.tpsw.domain.User.class.getName() + ".authorities");
             createCache(cm, de.tpsw.domain.Achievement.class.getName());
+            createCache(cm, de.tpsw.domain.Achievement.class.getName() + ".planets");
+            createCache(cm, de.tpsw.domain.Animal.class.getName());
+            createCache(cm, de.tpsw.domain.Planet.class.getName());
+            createCache(cm, de.tpsw.domain.Planet.class.getName() + ".animals");
+            createCache(cm, de.tpsw.domain.Planet.class.getName() + ".achievements");
             // jhipster-needle-ehcache-add-entry
         };
     }

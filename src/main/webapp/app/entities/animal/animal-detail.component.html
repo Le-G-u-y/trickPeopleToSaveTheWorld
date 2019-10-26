@@ -1,0 +1,53 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="animal">
+            <h2><span jhiTranslate="trickPeopleToSaveTheWorldApp.animal.detail.title">Animal</span> {{animal.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="trickPeopleToSaveTheWorldApp.animal.name">Name</span></dt>
+                <dd>
+                    <span>{{animal.name}}</span>
+                </dd>
+                <dt><span jhiTranslate="trickPeopleToSaveTheWorldApp.animal.animalType">Animal Type</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'trickPeopleToSaveTheWorldApp.AnimalType.' + animal.animalType}}">{{animal.animalType}}</span>
+                </dd>
+                <dt><span jhiTranslate="trickPeopleToSaveTheWorldApp.animal.maxHealth">Max Health</span></dt>
+                <dd>
+                    <span>{{animal.maxHealth}}</span>
+                </dd>
+                <dt><span jhiTranslate="trickPeopleToSaveTheWorldApp.animal.currentHealth">Current Health</span></dt>
+                <dd>
+                    <span>{{animal.currentHealth}}</span>
+                </dd>
+                <dt><span jhiTranslate="trickPeopleToSaveTheWorldApp.animal.creationDate">Creation Date</span></dt>
+                <dd>
+                    <span>{{animal.creationDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="trickPeopleToSaveTheWorldApp.animal.happiness">Happiness</span></dt>
+                <dd>
+                    <span>{{animal.happiness}}</span>
+                </dd>
+                <dt><span jhiTranslate="trickPeopleToSaveTheWorldApp.animal.planet">Planet</span></dt>
+                <dd>
+                    <div *ngIf="animal.planet">
+                        <a [routerLink]="['/planet', animal.planet?.id, 'view']">{{animal.planet?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/animal', animal.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

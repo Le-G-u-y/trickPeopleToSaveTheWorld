@@ -1,0 +1,41 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="planet">
+            <h2><span jhiTranslate="trickPeopleToSaveTheWorldApp.planet.detail.title">Planet</span> {{planet.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="trickPeopleToSaveTheWorldApp.planet.forestPoints">Forest Points</span></dt>
+                <dd>
+                    <span>{{planet.forestPoints}}</span>
+                </dd>
+                <dt><span jhiTranslate="trickPeopleToSaveTheWorldApp.planet.waterPoints">Water Points</span></dt>
+                <dd>
+                    <span>{{planet.waterPoints}}</span>
+                </dd>
+                <dt><span jhiTranslate="trickPeopleToSaveTheWorldApp.planet.smogPoints">Smog Points</span></dt>
+                <dd>
+                    <span>{{planet.smogPoints}}</span>
+                </dd>
+                <dt><span jhiTranslate="trickPeopleToSaveTheWorldApp.planet.achievement">Achievement</span></dt>
+                <dd>
+                    <span *ngFor="let achievement of planet.achievements; let last = last">
+                        <a [routerLink]="['/achievement', achievement?.id, 'view' ]">{{achievement.id}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/planet', planet.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

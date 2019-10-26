@@ -1,0 +1,52 @@
+{
+    "name": "Planet",
+    "fields": [
+        {
+            "fieldName": "forestPoints",
+            "fieldType": "Long",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "waterPoints",
+            "fieldType": "Long",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "smogPoints",
+            "fieldType": "Long",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "animal",
+            "otherEntityRelationshipName": "planet",
+            "relationshipName": "animal"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "achievement",
+            "otherEntityRelationshipName": "planet",
+            "relationshipName": "achievement",
+            "otherEntityField": "id",
+            "ownerSide": true
+        }
+    ],
+    "changelogDate": "20191026103536",
+    "entityTableName": "planet",
+    "dto": "no",
+    "pagination": "no",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

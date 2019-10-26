@@ -8,6 +8,8 @@
       "entities": {
         "main": "Entities",
         "achievement": "Achievement",
+        "animal": "Animal",
+        "planet": "Planet",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {
