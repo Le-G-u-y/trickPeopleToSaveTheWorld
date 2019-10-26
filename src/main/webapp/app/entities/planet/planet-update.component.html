@@ -56,6 +56,20 @@
                 </div>
 
                 <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="trickPeopleToSaveTheWorldApp.planet.nextBabyAnimal" for="field_nextBabyAnimal">Next Baby Animal</label>
+                    <select class="form-control" id="field_nextBabyAnimal" name="nextBabyAnimal" formControlName="nextBabyAnimal">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="animalOption.id === editForm.get('nextBabyAnimal').value?.id ? editForm.get('nextBabyAnimal').value : animalOption" *ngFor="let animalOption of nextbabyanimals; trackBy: trackAnimalById">{{animalOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="trickPeopleToSaveTheWorldApp.planet.currentVictimAnimal" for="field_currentVictimAnimal">Current Victim Animal</label>
+                    <select class="form-control" id="field_currentVictimAnimal" name="currentVictimAnimal" formControlName="currentVictimAnimal">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="animalOption.id === editForm.get('currentVictimAnimal').value?.id ? editForm.get('currentVictimAnimal').value : animalOption" *ngFor="let animalOption of currentvictimanimals; trackBy: trackAnimalById">{{animalOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
                     <label jhiTranslate="trickPeopleToSaveTheWorldApp.planet.achievement" for="field_achievements">Achievement</label>
                     <select class="form-control" id="field_achievements" multiple name="achievements" formControlName="achievements">
                         <option [ngValue]="getSelected(editForm.get('achievements').value, achievementOption)" *ngFor="let achievementOption of achievements; trackBy: trackAchievementById">{{achievementOption.id}}</option>

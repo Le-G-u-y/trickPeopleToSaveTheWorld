@@ -17,6 +17,18 @@
                 <dd>
                     <span>{{planet.smogPoints}}</span>
                 </dd>
+                <dt><span jhiTranslate="trickPeopleToSaveTheWorldApp.planet.nextBabyAnimal">Next Baby Animal</span></dt>
+                <dd>
+                    <div *ngIf="planet.nextBabyAnimal">
+                        <a [routerLink]="['/animal', planet.nextBabyAnimal?.id, 'view']">{{planet.nextBabyAnimal?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="trickPeopleToSaveTheWorldApp.planet.currentVictimAnimal">Current Victim Animal</span></dt>
+                <dd>
+                    <div *ngIf="planet.currentVictimAnimal">
+                        <a [routerLink]="['/animal', planet.currentVictimAnimal?.id, 'view']">{{planet.currentVictimAnimal?.id}}</a>
+                    </div>
+                </dd>
                 <dt><span jhiTranslate="trickPeopleToSaveTheWorldApp.planet.achievement">Achievement</span></dt>
                 <dd>
                     <span *ngFor="let achievement of planet.achievements; let last = last">

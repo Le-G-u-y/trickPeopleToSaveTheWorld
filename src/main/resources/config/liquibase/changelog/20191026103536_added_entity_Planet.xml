@@ -24,6 +24,12 @@
             <column name="smog_points" type="bigint">
                 <constraints nullable="false" />
             </column>
+            <column name="next_baby_animal_id" type="bigint">
+                <constraints unique="true" nullable="true" uniqueConstraintName="ux_planet_next_baby_animal_id" />
+            </column>
+            <column name="current_victim_animal_id" type="bigint">
+                <constraints unique="true" nullable="true" uniqueConstraintName="ux_planet_current_victim_animal_id" />
+            </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
     </changeSet>

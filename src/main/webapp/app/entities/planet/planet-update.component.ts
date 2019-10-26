@@ -9,6 +9,8 @@ import { filter, map } from 'rxjs/operators';
 import { JhiAlertService } from 'ng-jhipster';
 import { IPlanet, Planet } from 'app/shared/model/planet.model';
 import { PlanetService } from './planet.service';
+import { IAnimal } from 'app/shared/model/animal.model';
+import { AnimalService } from 'app/entities/animal/animal.service';
 import { IAchievement } from 'app/shared/model/achievement.model';
 import { AchievementService } from 'app/entities/achievement/achievement.service';
 
@@ -19,6 +21,10 @@ import { AchievementService } from 'app/entities/achievement/achievement.service
 export class PlanetUpdateComponent implements OnInit {
   isSaving: boolean;
 
+  nextbabyanimals: IAnimal[];
+
+  currentvictimanimals: IAnimal[];
+
   achievements: IAchievement[];
 
   editForm = this.fb.group({
@@ -26,12 +32,15 @@ export class PlanetUpdateComponent implements OnInit {
     forestPoints: [null, [Validators.required]],
     waterPoints: [null, [Validators.required]],
     smogPoints: [null, [Validators.required]],
+    nextBabyAnimal: [],
+    currentVictimAnimal: [],
     achievements: []
   });
 
   constructor(
     protected jhiAlertService: JhiAlertService,
     protected planetService: PlanetService,
+    protected animalService: AnimalService,
     protected achievementService: AchievementService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
@@ -42,6 +51,56 @@ export class PlanetUpdateComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ planet }) => {
       this.updateForm(planet);
     });
+    this.animalService
+      .query({ filter: 'planet-is-null' })
+      .pipe(
+        filter((mayBeOk: HttpResponse<IAnimal[]>) => mayBeOk.ok),
+        map((response: HttpResponse<IAnimal[]>) => response.body)
+      )
+      .subscribe(
+        (res: IAnimal[]) => {
+          if (!this.editForm.get('nextBabyAnimal').value || !this.editForm.get('nextBabyAnimal').value.id) {
+            this.nextbabyanimals = res;
+          } else {
+            this.animalService
+              .find(this.editForm.get('nextBabyAnimal').value.id)
+              .pipe(
+                filter((subResMayBeOk: HttpResponse<IAnimal>) => subResMayBeOk.ok),
+                map((subResponse: HttpResponse<IAnimal>) => subResponse.body)
+              )
+              .subscribe(
+                (subRes: IAnimal) => (this.nextbabyanimals = [subRes].concat(res)),
+                (subRes: HttpErrorResponse) => this.onError(subRes.message)
+              );
+          }
+        },
+        (res: HttpErrorResponse) => this.onError(res.message)
+      );
+    this.animalService
+      .query({ filter: 'planet-is-null' })
+      .pipe(
+        filter((mayBeOk: HttpResponse<IAnimal[]>) => mayBeOk.ok),
+        map((response: HttpResponse<IAnimal[]>) => response.body)
+      )
+      .subscribe(
+        (res: IAnimal[]) => {
+          if (!this.editForm.get('currentVictimAnimal').value || !this.editForm.get('currentVictimAnimal').value.id) {
+            this.currentvictimanimals = res;
+          } else {
+            this.animalService
+              .find(this.editForm.get('currentVictimAnimal').value.id)
+              .pipe(
+                filter((subResMayBeOk: HttpResponse<IAnimal>) => subResMayBeOk.ok),
+                map((subResponse: HttpResponse<IAnimal>) => subResponse.body)
+              )
+              .subscribe(
+                (subRes: IAnimal) => (this.currentvictimanimals = [subRes].concat(res)),
+                (subRes: HttpErrorResponse) => this.onError(subRes.message)
+              );
+          }
+        },
+        (res: HttpErrorResponse) => this.onError(res.message)
+      );
     this.achievementService
       .query()
       .pipe(
@@ -57,6 +116,8 @@ export class PlanetUpdateComponent implements OnInit {
       forestPoints: planet.forestPoints,
       waterPoints: planet.waterPoints,
       smogPoints: planet.smogPoints,
+      nextBabyAnimal: planet.nextBabyAnimal,
+      currentVictimAnimal: planet.currentVictimAnimal,
       achievements: planet.achievements
     });
   }
@@ -82,6 +143,8 @@ export class PlanetUpdateComponent implements OnInit {
       forestPoints: this.editForm.get(['forestPoints']).value,
       waterPoints: this.editForm.get(['waterPoints']).value,
       smogPoints: this.editForm.get(['smogPoints']).value,
+      nextBabyAnimal: this.editForm.get(['nextBabyAnimal']).value,
+      currentVictimAnimal: this.editForm.get(['currentVictimAnimal']).value,
       achievements: this.editForm.get(['achievements']).value
     };
   }
@@ -100,6 +163,10 @@ export class PlanetUpdateComponent implements OnInit {
   }
   protected onError(errorMessage: string) {
     this.jhiAlertService.error(errorMessage, null, null);
+  }
+
+  trackAnimalById(index: number, item: IAnimal) {
+    return item.id;
   }
 
   trackAchievementById(index: number, item: IAchievement) {
