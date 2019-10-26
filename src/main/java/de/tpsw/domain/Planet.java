@@ -36,6 +36,14 @@ public class Planet implements Serializable {
     @Column(name = "smog_points", nullable = false)
     private Long smogPoints;
 
+    @OneToOne
+    @JoinColumn(unique = true)
+    private Animal nextBabyAnimal;
+
+    @OneToOne
+    @JoinColumn(unique = true)
+    private Animal currentVictimAnimal;
+
     @OneToMany(mappedBy = "planet")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Animal> animals = new HashSet<>();
@@ -93,6 +101,32 @@ public class Planet implements Serializable {
 
     public void setSmogPoints(Long smogPoints) {
         this.smogPoints = smogPoints;
+    }
+
+    public Animal getNextBabyAnimal() {
+        return nextBabyAnimal;
+    }
+
+    public Planet nextBabyAnimal(Animal animal) {
+        this.nextBabyAnimal = animal;
+        return this;
+    }
+
+    public void setNextBabyAnimal(Animal animal) {
+        this.nextBabyAnimal = animal;
+    }
+
+    public Animal getCurrentVictimAnimal() {
+        return currentVictimAnimal;
+    }
+
+    public Planet currentVictimAnimal(Animal animal) {
+        this.currentVictimAnimal = animal;
+        return this;
+    }
+
+    public void setCurrentVictimAnimal(Animal animal) {
+        this.currentVictimAnimal = animal;
     }
 
     public Set<Animal> getAnimals() {

@@ -31,6 +31,7 @@ export class AnimalUpdateComponent implements OnInit {
     currentHealth: [null, [Validators.required]],
     creationDate: [],
     happiness: [null, [Validators.required]],
+    deathNotified: [],
     planet: []
   });
 
@@ -65,6 +66,7 @@ export class AnimalUpdateComponent implements OnInit {
       currentHealth: animal.currentHealth,
       creationDate: animal.creationDate,
       happiness: animal.happiness,
+      deathNotified: animal.deathNotified,
       planet: animal.planet
     });
   }
@@ -93,6 +95,7 @@ export class AnimalUpdateComponent implements OnInit {
       currentHealth: this.editForm.get(['currentHealth']).value,
       creationDate: this.editForm.get(['creationDate']).value,
       happiness: this.editForm.get(['happiness']).value,
+      deathNotified: this.editForm.get(['deathNotified']).value,
       planet: this.editForm.get(['planet']).value
     };
   }

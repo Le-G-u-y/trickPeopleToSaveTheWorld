@@ -8,6 +8,18 @@
     -->
     <changeSet id="20191026103536-2" author="jhipster">
         
+        <addForeignKeyConstraint baseColumnNames="next_baby_animal_id"
+                                 baseTableName="planet"
+                                 constraintName="fk_planet_next_baby_animal_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="animal"/>
+
+        <addForeignKeyConstraint baseColumnNames="current_victim_animal_id"
+                                 baseTableName="planet"
+                                 constraintName="fk_planet_current_victim_animal_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="animal"/>
+
         <addForeignKeyConstraint baseColumnNames="planet_id"
                                  baseTableName="planet_achievement"
                                  constraintName="fk_planet_achievement_planet_id"

@@ -1,11 +1,11 @@
-id;name;animal_type;max_health;current_health;creation_date;happiness
-1;Multi-channelled Licensed;PIG;59241;46676;2019-10-26;true
-2;Yuan Renminbi Centers;CHICKEN;96563;56328;2019-10-25;false
-3;Music;COW;44015;68326;2019-10-26;true
-4;backing up Salad;PIG;31171;42515;2019-10-25;false
-5;Georgia Industrial;CHICKEN;59789;72727;2019-10-25;false
-6;Georgia;COW;27134;53969;2019-10-25;true
-7;Specialist Home Loan Account;PIG;80219;16526;2019-10-26;false
-8;deliverables reinvent 24 hour;PIG;70685;71134;2019-10-25;true
-9;Checking Account Identity deposit;COW;6355;37081;2019-10-26;true
-10;payment;CHICKEN;47221;38292;2019-10-26;true
+id;name;animal_type;max_health;current_health;creation_date;happiness;death_notified
+1;Multi-channelled Licensed;COW;59241;46676;2019-10-26;true;true
+2;Table Small Frozen Sausages Planner;CHICKEN;24102;44015;2019-10-25;false;true
+3;backing up Salad;PIG;31171;42515;2019-10-26;false;true
+4;Chair Facilitator;PIG;72727;92187;2019-10-26;false;true
+5;Aruba;COW;82873;58675;2019-10-26;true;false
+6;Faroe Islands Plastic;CHICKEN;39488;19871;2019-10-26;false;false
+7;magenta monitor 1080p;PIG;86310;85003;2019-10-25;false;false
+8;Fantastic Plastic Chicken;PIG;59129;63755;2019-10-26;true;true
+9;embrace Developer;CHICKEN;49379;4043;2019-10-26;true;false
+10;Grocery;COW;89576;63641;2019-10-26;false;true

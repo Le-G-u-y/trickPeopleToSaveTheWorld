@@ -25,7 +25,7 @@ describe('Service Tests', () => {
       httpMock = injector.get(HttpTestingController);
       currentDate = moment();
 
-      elemDefault = new Animal(0, 'AAAAAAA', AnimalType.PIG, 0, 0, currentDate, false);
+      elemDefault = new Animal(0, 'AAAAAAA', AnimalType.PIG, 0, 0, currentDate, false, false);
     });
 
     describe('Service methods', () => {
@@ -77,7 +77,8 @@ describe('Service Tests', () => {
             maxHealth: 1,
             currentHealth: 1,
             creationDate: currentDate.format(DATE_FORMAT),
-            happiness: true
+            happiness: true,
+            deathNotified: true
           },
           elemDefault
         );
@@ -105,7 +106,8 @@ describe('Service Tests', () => {
             maxHealth: 1,
             currentHealth: 1,
             creationDate: currentDate.format(DATE_FORMAT),
-            happiness: true
+            happiness: true,
+            deathNotified: true
           },
           elemDefault
         );
