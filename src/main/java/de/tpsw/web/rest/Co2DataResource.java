@@ -56,15 +56,24 @@ public class Co2DataResource {
         try {
             JSONObject jsonObject = new JSONObject(co2DataJsonString);
 
-        Co2Data co2Data = new Co2Data();
-        co2Data.setCo2Value(jsonObject.getInt("co2"));
-        co2Data.setHumidity((Float) jsonObject.get("hum"));
-        co2Data.setTemp((Float)jsonObject.get("temp"));
-        result = co2DataService.save(co2Data);
+            Co2Data co2Data = new Co2Data();
+            Object co2 = jsonObject.get("co2");
+            if (co2 != null) {
+                co2Data.setCo2Value((Integer) co2);
+            }
+            Object hum = jsonObject.get("hum");
+            if (hum != null) {
+                co2Data.setHumidity((Float) hum);
+            }
+            Object temp = jsonObject.get("temp");
+            if (temp != null) {
+                co2Data.setTemp((Float) temp);
+            }
+            result = co2DataService.save(co2Data);
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        if(result!=null) {
+        if (result != null) {
             return ResponseEntity.created(new URI("/api/co-2-data/" + result.getId()))
                 .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
                 .body(result);
@@ -97,7 +106,6 @@ public class Co2DataResource {
     /**
      * {@code GET  /co-2-data} : get all the co2Data.
      *
-
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of co2Data in body.
      */
     @GetMapping("/co-2-data")
