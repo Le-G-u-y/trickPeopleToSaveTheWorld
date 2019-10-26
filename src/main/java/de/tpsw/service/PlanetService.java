@@ -6,7 +6,7 @@ import de.tpsw.domain.enumeration.AnimalType;
 import de.tpsw.repository.PlanetRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -26,6 +26,9 @@ public class PlanetService {
     private final Logger log = LoggerFactory.getLogger(PlanetService.class);
 
     private final PlanetRepository planetRepository;
+
+    @Autowired
+    private AnimalService animalService;
 
     public PlanetService(PlanetRepository planetRepository) {
         this.planetRepository = planetRepository;
@@ -70,6 +73,7 @@ public class PlanetService {
         // increase or decrease victim's health
         // Victim dead? => UI will inform the user
         Integer healthOverflow = currentVictim.alterHealth(healthDiff);
+        animalService.save(currentVictim);
 
         // Add health (positive) overflow to upcoming baby
         Animal nextBaby = planet.getNextBabyAnimal();
@@ -89,6 +93,9 @@ public class PlanetService {
             brandNewBaby.setHappiness(true);
             brandNewBaby.setDeathNotified(false);
             brandNewBaby.setPlanet(planet);
+
+            // persist
+            animalService.save(brandNewBaby);
 
             planet.setNextBabyAnimal(brandNewBaby);
         }

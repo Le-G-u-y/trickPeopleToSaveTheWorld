@@ -89,7 +89,7 @@ public class PlanetResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/updateCurrentVictim")
-    public Planet updateCurrentVictim(@RequestParam Long planetId, @RequestParam Integer dietType) throws URISyntaxException {
+    public Boolean updateCurrentVictim(@RequestParam Long planetId, @RequestParam Integer dietType) throws URISyntaxException {
         log.debug("REST request to update Planet : {} with diet: {}", planetId, dietType);
 
         if (planetId == null) {
@@ -97,9 +97,9 @@ public class PlanetResource {
         }
 
         // Calculate consequences on animals!
-        Planet resultPlanet = planetService.updateCurrentVictim(planetId, dietType);
+        planetService.updateCurrentVictim(planetId, dietType);
 
-        return resultPlanet;
+        return true;
     }
 
     /**
