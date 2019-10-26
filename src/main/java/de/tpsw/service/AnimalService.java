@@ -4,10 +4,11 @@ import de.tpsw.domain.Animal;
 import de.tpsw.repository.AnimalRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,7 +46,19 @@ public class AnimalService {
     @Transactional(readOnly = true)
     public List<Animal> findAll() {
         log.debug("Request to get all Animals");
-        return animalRepository.findAll();
+        List<Animal> allAnimals = animalRepository.findAll();
+
+        // return only alive animal. Or dead animals, that the user hasnt been notified about
+        List<Animal> aliveAnimals = new ArrayList<>();
+        for (Animal animal : allAnimals) {
+
+            if (animal.getCurrentHealth() > 0
+                || animal.isDeathNotified() == false) {
+                aliveAnimals.add(animal);
+            }
+        }
+
+        return aliveAnimals;
     }
 
 
@@ -59,6 +72,27 @@ public class AnimalService {
     public Optional<Animal> findOne(Long id) {
         log.debug("Request to get Animal : {}", id);
         return animalRepository.findById(id);
+    }
+
+    /**
+     * Get one unnotified dead animal
+     *
+     * @return the entity.
+     */
+    @Transactional(readOnly = true)
+    public Animal findDeadUnnotified() {
+
+        //HACK
+        List<Animal> animals = findAll();
+
+        for(Animal animal : animals) {
+            if(animal.getCurrentHealth() <= 0
+                && animal.isDeathNotified() == false)
+            {
+                return animal;
+            }
+        }
+        return null;
     }
 
     /**
