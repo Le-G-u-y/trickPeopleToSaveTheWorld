@@ -9,6 +9,8 @@ import { filter, map } from 'rxjs/operators';
 import { JhiAlertService } from 'ng-jhipster';
 import { IPlanet, Planet } from 'app/shared/model/planet.model';
 import { PlanetService } from './planet.service';
+import { IUser } from 'app/core/user/user.model';
+import { UserService } from 'app/core/user/user.service';
 import { IAchievement } from 'app/shared/model/achievement.model';
 import { AchievementService } from 'app/entities/achievement/achievement.service';
 
@@ -19,6 +21,8 @@ import { AchievementService } from 'app/entities/achievement/achievement.service
 export class PlanetUpdateComponent implements OnInit {
   isSaving: boolean;
 
+  users: IUser[];
+
   achievements: IAchievement[];
 
   editForm = this.fb.group({
@@ -26,12 +30,14 @@ export class PlanetUpdateComponent implements OnInit {
     forestPoints: [null, [Validators.required]],
     waterPoints: [null, [Validators.required]],
     smogPoints: [null, [Validators.required]],
+    owner: [null, Validators.required],
     achievements: []
   });
 
   constructor(
     protected jhiAlertService: JhiAlertService,
     protected planetService: PlanetService,
+    protected userService: UserService,
     protected achievementService: AchievementService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
@@ -42,6 +48,13 @@ export class PlanetUpdateComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ planet }) => {
       this.updateForm(planet);
     });
+    this.userService
+      .query()
+      .pipe(
+        filter((mayBeOk: HttpResponse<IUser[]>) => mayBeOk.ok),
+        map((response: HttpResponse<IUser[]>) => response.body)
+      )
+      .subscribe((res: IUser[]) => (this.users = res), (res: HttpErrorResponse) => this.onError(res.message));
     this.achievementService
       .query()
       .pipe(
@@ -57,6 +70,7 @@ export class PlanetUpdateComponent implements OnInit {
       forestPoints: planet.forestPoints,
       waterPoints: planet.waterPoints,
       smogPoints: planet.smogPoints,
+      owner: planet.owner,
       achievements: planet.achievements
     });
   }
@@ -82,6 +96,7 @@ export class PlanetUpdateComponent implements OnInit {
       forestPoints: this.editForm.get(['forestPoints']).value,
       waterPoints: this.editForm.get(['waterPoints']).value,
       smogPoints: this.editForm.get(['smogPoints']).value,
+      owner: this.editForm.get(['owner']).value,
       achievements: this.editForm.get(['achievements']).value
     };
   }
@@ -100,6 +115,10 @@ export class PlanetUpdateComponent implements OnInit {
   }
   protected onError(errorMessage: string) {
     this.jhiAlertService.error(errorMessage, null, null);
+  }
+
+  trackUserById(index: number, item: IUser) {
+    return item.id;
   }
 
   trackAchievementById(index: number, item: IAchievement) {
