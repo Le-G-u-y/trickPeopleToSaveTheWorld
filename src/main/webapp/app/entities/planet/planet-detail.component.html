@@ -17,10 +17,6 @@
                 <dd>
                     <span>{{planet.smogPoints}}</span>
                 </dd>
-                <dt><span jhiTranslate="trickPeopleToSaveTheWorldApp.planet.owner">Owner</span></dt>
-                <dd>
-                    {{planet.owner?.id}}
-                </dd>
                 <dt><span jhiTranslate="trickPeopleToSaveTheWorldApp.planet.achievement">Achievement</span></dt>
                 <dd>
                     <span *ngFor="let achievement of planet.achievements; let last = last">

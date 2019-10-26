@@ -25,15 +25,6 @@
     ],
     "relationships": [
         {
-            "relationshipType": "one-to-one",
-            "otherEntityName": "user",
-            "otherEntityRelationshipName": "planet",
-            "relationshipValidateRules": "required",
-            "relationshipName": "owner",
-            "otherEntityField": "id",
-            "ownerSide": true
-        },
-        {
             "relationshipType": "one-to-many",
             "otherEntityName": "animal",
             "otherEntityRelationshipName": "planet",

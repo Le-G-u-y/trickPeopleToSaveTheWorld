@@ -10,6 +10,8 @@
         "achievement": "Achievement",
         "animal": "Animal",
         "planet": "Planet",
+        "lightingData": "Lighting Data",
+        "co2Data": "Co 2 Data",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

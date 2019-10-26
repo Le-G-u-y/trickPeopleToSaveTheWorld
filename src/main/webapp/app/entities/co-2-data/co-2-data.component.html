@@ -1,0 +1,64 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="trickPeopleToSaveTheWorldApp.co2Data.home.title">Co 2 Data</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-co-2-data" [routerLink]="['/co-2-data/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="trickPeopleToSaveTheWorldApp.co2Data.home.createLabel">
+            Create a new Co 2 Data
+            </span>
+        </button>
+    </h2>
+    <jhi-alert-error></jhi-alert-error>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="alert alert-warning" *ngIf="co2Data?.length === 0">
+        <span jhiTranslate="trickPeopleToSaveTheWorldApp.co2Data.home.notFound">No co2Data found</span>
+    </div>
+    <div class="table-responsive" *ngIf="co2Data?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+            <tr>
+            <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
+            <th scope="col" ><span jhiTranslate="trickPeopleToSaveTheWorldApp.co2Data.timestamp">Timestamp</span></th>
+            <th scope="col" ><span jhiTranslate="trickPeopleToSaveTheWorldApp.co2Data.co2Value">Co 2 Value</span></th>
+            <th scope="col" ><span jhiTranslate="trickPeopleToSaveTheWorldApp.co2Data.temp">Temp</span></th>
+            <th scope="col" ><span jhiTranslate="trickPeopleToSaveTheWorldApp.co2Data.humidity">Humidity</span></th>
+            <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let co2Data of co2Data ;trackBy: trackId">
+                <td><a [routerLink]="['/co-2-data', co2Data.id, 'view' ]">{{co2Data.id}}</a></td>
+                <td>{{co2Data.timestamp | date:'mediumDate'}}</td>
+                <td>{{co2Data.co2Value}}</td>
+                <td>{{co2Data.temp}}</td>
+                <td>{{co2Data.humidity}}</td>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <button type="submit"
+                                [routerLink]="['/co-2-data', co2Data.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/co-2-data', co2Data.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/co-2-data', { outlets: { popup: co2Data.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

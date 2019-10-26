@@ -1,0 +1,23 @@
+{
+  "trickPeopleToSaveTheWorldApp": {
+    "lightingData": {
+      "home": {
+        "title": "Lighting Data",
+        "createLabel": "Lighting Data erstellen",
+        "createOrEditLabel": "Lighting Data erstellen oder bearbeiten",
+        "notFound": "No Lighting Data found"
+      },
+      "created": "Lighting Data erstellt mit ID {{ param }}",
+      "updated": "Lighting Data aktualisiert mit ID {{ param }}",
+      "deleted": "Lighting Data gelöscht mit ID {{ param }}",
+      "delete": {
+        "question": "Soll Lighting Data {{ id }} wirklich dauerhaft gelöscht werden?"
+      },
+      "detail": {
+        "title": "Lighting Data"
+      },
+      "onSeconds": "On Seconds",
+      "offSeconds": "Off Seconds"
+    }
+  }
+}

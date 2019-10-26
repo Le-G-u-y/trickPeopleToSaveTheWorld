@@ -2,7 +2,6 @@ package de.tpsw.web.rest;
 
 import de.tpsw.TrickPeopleToSaveTheWorldApp;
 import de.tpsw.domain.Planet;
-import de.tpsw.domain.User;
 import de.tpsw.repository.PlanetRepository;
 import de.tpsw.service.PlanetService;
 import de.tpsw.web.rest.errors.ExceptionTranslator;
@@ -103,11 +102,6 @@ public class PlanetResourceIT {
             .forestPoints(DEFAULT_FOREST_POINTS)
             .waterPoints(DEFAULT_WATER_POINTS)
             .smogPoints(DEFAULT_SMOG_POINTS);
-        // Add required entity
-        User user = UserResourceIT.createEntity(em);
-        em.persist(user);
-        em.flush();
-        planet.setOwner(user);
         return planet;
     }
     /**
@@ -121,11 +115,6 @@ public class PlanetResourceIT {
             .forestPoints(UPDATED_FOREST_POINTS)
             .waterPoints(UPDATED_WATER_POINTS)
             .smogPoints(UPDATED_SMOG_POINTS);
-        // Add required entity
-        User user = UserResourceIT.createEntity(em);
-        em.persist(user);
-        em.flush();
-        planet.setOwner(user);
         return planet;
     }
 
