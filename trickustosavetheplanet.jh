@@ -21,10 +21,11 @@ entity Animal {
    currentHealth Integer required
    creationDate LocalDate ,
    happiness Boolean required,
+   deathNotified Boolean;
 }
 
 entity Planet {
-	forestPoints Long required,
+   forestPoints Long required,
    waterPoints Long required,
    smogPoints Long required,
    // owner User required,
