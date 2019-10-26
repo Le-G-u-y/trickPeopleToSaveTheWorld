@@ -1,7 +1,6 @@
 package de.tpsw.web.rest;
 
 import de.tpsw.domain.LightingData;
-import de.tpsw.repository.LightingDataRepository;
 import de.tpsw.service.LightingDataService;
 import de.tpsw.web.rest.errors.BadRequestAlertException;
 
@@ -10,8 +9,6 @@ import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.configurationprocessor.json.JSONException;
-import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -44,32 +41,20 @@ public class LightingDataResource {
     /**
      * {@code POST  /lighting-data} : Create a new lightingData.
      *
-     * @param lightingDataJson the lightingData to create.
+     * @param lightingData the lightingData to create.
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new lightingData, or with status {@code 400 (Bad Request)} if the lightingData has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/lighting-data")
-    public ResponseEntity<LightingData> createLightingData(@RequestBody String lightingDataJson) throws URISyntaxException {
-        log.debug("REST request to save LightingData : {}", lightingDataJson);
-        try {
-            JSONObject json = new JSONObject(lightingDataJson);
-
-        LightingData lightingData = new LightingData();
-        Boolean on = json.getBoolean("on");
-        if(Boolean.TRUE.equals(on)){
-            lightingData.setOnSeconds(10l);
-        }
-        else{
-            lightingData.setOffSeconds(10l);
+    public ResponseEntity<LightingData> createLightingData(@RequestBody LightingData lightingData) throws URISyntaxException {
+        log.debug("REST request to save LightingData : {}", lightingData);
+        if (lightingData.getId() != null) {
+            throw new BadRequestAlertException("A new lightingData cannot already have an ID", ENTITY_NAME, "idexists");
         }
         LightingData result = lightingDataService.save(lightingData);
         return ResponseEntity.created(new URI("/api/lighting-data/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return null;
     }
 
     /**
