@@ -1,0 +1,22 @@
+{
+  "trickPeopleToSaveTheWorldApp": {
+    "achievement": {
+      "home": {
+        "title": "Achievements",
+        "createLabel": "Achievement erstellen",
+        "createOrEditLabel": "Achievement erstellen oder bearbeiten",
+        "notFound": "No Achievements found"
+      },
+      "created": "Achievement erstellt mit ID {{ param }}",
+      "updated": "Achievement aktualisiert mit ID {{ param }}",
+      "deleted": "Achievement gelöscht mit ID {{ param }}",
+      "delete": {
+        "question": "Soll Achievement {{ id }} wirklich dauerhaft gelöscht werden?"
+      },
+      "detail": {
+        "title": "Achievement"
+      },
+      "name": "Name"
+    }
+  }
+}
