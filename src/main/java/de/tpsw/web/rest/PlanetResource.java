@@ -80,29 +80,6 @@ public class PlanetResource {
     }
 
     /**
-     * {@code PUT  /planets} : Updates an existing planet.
-     *
-     * @param planetId the planet to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated planet,
-     * or with status {@code 400 (Bad Request)} if the planet is not valid,
-     * or with status {@code 500 (Internal Server Error)} if the planet couldn't be updated.
-     * @throws URISyntaxException if the Location URI syntax is incorrect.
-     */
-    @PutMapping("/updateCurrentVictim")
-    public Boolean updateCurrentVictim(@RequestParam Long planetId, @RequestParam Integer dietType) throws URISyntaxException {
-        log.debug("REST request to update Planet : {} with diet: {}", planetId, dietType);
-
-        if (planetId == null) {
-            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
-        }
-
-        // Calculate consequences on animals!
-        planetService.updateCurrentVictim(planetId, dietType);
-
-        return true;
-    }
-
-    /**
      * {@code GET  /planets} : get all the planets.
      *
      * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
