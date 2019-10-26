@@ -1,14 +1,15 @@
 package de.tpsw.domain;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import de.tpsw.domain.enumeration.AnimalType;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
+
 import java.io.Serializable;
 import java.time.LocalDate;
+
+import de.tpsw.domain.enumeration.AnimalType;
 
 /**
  * A Animal.
@@ -168,40 +169,6 @@ public class Animal implements Serializable {
         this.planet = planet;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
-
-
-    // Health Management
-    /**
-     * add health to animal and return the health diff
-     * @param healthChange
-     * @return health diff, thats over the max health of animal
-     */
-    public Integer alterHealth(Integer healthChange) {
-
-        this.setCurrentHealth(this.getCurrentHealth() + healthChange);
-
-        // calculate an overflow of health (for adding it to a baby)
-        Integer healthDiff = 0;
-        if (this.checkIsHealthFull()) {
-
-            healthDiff = this.getCurrentHealth() - this.getMaxHealth();
-            if (healthDiff > 0) {
-                // limit current health to max
-                this.setCurrentHealth(this.getMaxHealth());
-            }
-        }
-
-        return healthDiff;
-    }
-
-    public boolean checkIsHealthFull() {
-        if (currentHealth >= maxHealth) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
 
     @Override
     public boolean equals(Object o) {
