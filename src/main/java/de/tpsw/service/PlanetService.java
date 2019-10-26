@@ -75,7 +75,7 @@ public class PlanetService {
         Animal nextBaby = planet.getNextBabyAnimal();
         nextBaby.alterHealth(healthOverflow);
 
-        if(nextBaby.isHealthFull()){
+        if(nextBaby.checkIsHealthFull()){
             // baby is now adult! it part of the normal animals now
             planet.getAnimals().add(nextBaby);
 

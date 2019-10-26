@@ -182,7 +182,7 @@ public class Animal implements Serializable {
 
         // calculate an overflow of health (for adding it to a baby)
         Integer healthDiff = 0;
-        if (this.isHealthFull()) {
+        if (this.checkIsHealthFull()) {
 
             healthDiff = this.getCurrentHealth() - this.getMaxHealth();
             if (healthDiff > 0) {
@@ -194,7 +194,7 @@ public class Animal implements Serializable {
         return healthDiff;
     }
 
-    public boolean isHealthFull() {
+    public boolean checkIsHealthFull() {
         if (currentHealth >= maxHealth) {
             return true;
         } else {
