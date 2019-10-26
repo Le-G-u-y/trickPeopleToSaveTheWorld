@@ -51,13 +51,12 @@ relationship OneToMany {
    Planet{animal} to Animal
 }
 
-// Probleme mit User Beziehung. ggfs. manuell bauen
-// relationship OneToOne {
-//    Planet{owner required} to User
-// }
 
+ relationship OneToOne {
+    Planet{owner required} to User
+ }
 
-// Probleme mit User Beziehung. ggfs. manuell bauen
+// Problems with user relationships
 // relationship ManyToMany {
 //    User{friend} to User
 // }

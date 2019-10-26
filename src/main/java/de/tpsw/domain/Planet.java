@@ -36,6 +36,11 @@ public class Planet implements Serializable {
     @Column(name = "smog_points", nullable = false)
     private Long smogPoints;
 
+    @OneToOne(optional = false)    @NotNull
+
+    @JoinColumn(unique = true)
+    private User owner;
+
     @OneToMany(mappedBy = "planet")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Animal> animals = new HashSet<>();
@@ -93,6 +98,19 @@ public class Planet implements Serializable {
 
     public void setSmogPoints(Long smogPoints) {
         this.smogPoints = smogPoints;
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+
+    public Planet owner(User user) {
+        this.owner = user;
+        return this;
+    }
+
+    public void setOwner(User user) {
+        this.owner = user;
     }
 
     public Set<Animal> getAnimals() {

@@ -22,6 +22,7 @@
             <th scope="col" ><span jhiTranslate="trickPeopleToSaveTheWorldApp.planet.forestPoints">Forest Points</span></th>
             <th scope="col" ><span jhiTranslate="trickPeopleToSaveTheWorldApp.planet.waterPoints">Water Points</span></th>
             <th scope="col" ><span jhiTranslate="trickPeopleToSaveTheWorldApp.planet.smogPoints">Smog Points</span></th>
+            <th scope="col" ><span jhiTranslate="trickPeopleToSaveTheWorldApp.planet.owner">Owner</span></th>
             <th scope="col" ><span jhiTranslate="trickPeopleToSaveTheWorldApp.planet.achievement">Achievement</span></th>
             <th scope="col"></th>
             </tr>
@@ -32,6 +33,9 @@
                 <td>{{planet.forestPoints}}</td>
                 <td>{{planet.waterPoints}}</td>
                 <td>{{planet.smogPoints}}</td>
+                <td>
+                    {{planet.owner?.id}}
+                </td>
                 <td>
                     <span *ngFor="let achievement of planet.achievements; let last = last">
                             <a class="form-control-static" [routerLink]="['/achievement', achievement?.id, 'view' ]">{{achievement.id}}</a>{{last ? '' : ', '}}

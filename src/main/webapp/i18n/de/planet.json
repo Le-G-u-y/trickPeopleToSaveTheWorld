@@ -19,6 +19,7 @@
       "forestPoints": "Forest Points",
       "waterPoints": "Water Points",
       "smogPoints": "Smog Points",
+      "owner": "Owner",
       "animal": "Animal",
       "achievement": "Achievement"
     }
