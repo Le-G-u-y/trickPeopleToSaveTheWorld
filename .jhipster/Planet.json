@@ -25,6 +25,22 @@
     ],
     "relationships": [
         {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "animal",
+            "otherEntityRelationshipName": "planet",
+            "relationshipName": "nextBabyAnimal",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "animal",
+            "otherEntityRelationshipName": "planet",
+            "relationshipName": "currentVictimAnimal",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
             "relationshipType": "one-to-many",
             "otherEntityName": "animal",
             "otherEntityRelationshipName": "planet",

@@ -19,6 +19,8 @@
       "forestPoints": "Forest Points",
       "waterPoints": "Water Points",
       "smogPoints": "Smog Points",
+      "nextBabyAnimal": "Next Baby Animal",
+      "currentVictimAnimal": "Current Victim Animal",
       "animal": "Animal",
       "achievement": "Achievement"
     }

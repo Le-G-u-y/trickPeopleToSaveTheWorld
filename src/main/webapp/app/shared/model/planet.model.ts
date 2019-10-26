@@ -6,6 +6,8 @@ export interface IPlanet {
   forestPoints?: number;
   waterPoints?: number;
   smogPoints?: number;
+  nextBabyAnimal?: IAnimal;
+  currentVictimAnimal?: IAnimal;
   animals?: IAnimal[];
   achievements?: IAchievement[];
 }
@@ -16,6 +18,8 @@ export class Planet implements IPlanet {
     public forestPoints?: number,
     public waterPoints?: number,
     public smogPoints?: number,
+    public nextBabyAnimal?: IAnimal,
+    public currentVictimAnimal?: IAnimal,
     public animals?: IAnimal[],
     public achievements?: IAchievement[]
   ) {}

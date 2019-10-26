@@ -22,6 +22,8 @@
             <th scope="col" ><span jhiTranslate="trickPeopleToSaveTheWorldApp.planet.forestPoints">Forest Points</span></th>
             <th scope="col" ><span jhiTranslate="trickPeopleToSaveTheWorldApp.planet.waterPoints">Water Points</span></th>
             <th scope="col" ><span jhiTranslate="trickPeopleToSaveTheWorldApp.planet.smogPoints">Smog Points</span></th>
+            <th scope="col" ><span jhiTranslate="trickPeopleToSaveTheWorldApp.planet.nextBabyAnimal">Next Baby Animal</span></th>
+            <th scope="col" ><span jhiTranslate="trickPeopleToSaveTheWorldApp.planet.currentVictimAnimal">Current Victim Animal</span></th>
             <th scope="col" ><span jhiTranslate="trickPeopleToSaveTheWorldApp.planet.achievement">Achievement</span></th>
             <th scope="col"></th>
             </tr>
@@ -32,6 +34,16 @@
                 <td>{{planet.forestPoints}}</td>
                 <td>{{planet.waterPoints}}</td>
                 <td>{{planet.smogPoints}}</td>
+                <td>
+                    <div *ngIf="planet.nextBabyAnimal">
+                        <a [routerLink]="['/animal', planet.nextBabyAnimal?.id, 'view' ]" >{{planet.nextBabyAnimal?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="planet.currentVictimAnimal">
+                        <a [routerLink]="['/animal', planet.currentVictimAnimal?.id, 'view' ]" >{{planet.currentVictimAnimal?.id}}</a>
+                    </div>
+                </td>
                 <td>
                     <span *ngFor="let achievement of planet.achievements; let last = last">
                             <a class="form-control-static" [routerLink]="['/achievement', achievement?.id, 'view' ]">{{achievement.id}}</a>{{last ? '' : ', '}}
