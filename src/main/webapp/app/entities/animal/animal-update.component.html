@@ -1,0 +1,100 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-animal-heading" jhiTranslate="trickPeopleToSaveTheWorldApp.animal.home.createOrEditLabel">Create or edit a Animal</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!editForm.get('id').value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="trickPeopleToSaveTheWorldApp.animal.name" for="field_name">Name</label>
+                    <input type="text" class="form-control" name="name" id="field_name"
+                           formControlName="name"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="trickPeopleToSaveTheWorldApp.animal.animalType" for="field_animalType">Animal Type</label>
+                    <select class="form-control" name="animalType" formControlName="animalType" id="field_animalType">
+                        <option value="PIG">{{'trickPeopleToSaveTheWorldApp.AnimalType.PIG' | translate}}</option>
+                        <option value="CHICKEN">{{'trickPeopleToSaveTheWorldApp.AnimalType.CHICKEN' | translate}}</option>
+                        <option value="COW">{{'trickPeopleToSaveTheWorldApp.AnimalType.COW' | translate}}</option>
+                    </select>
+                    <div *ngIf="editForm.get('animalType').invalid && (editForm.get('animalType').dirty || editForm.get('animalType').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('animalType').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="trickPeopleToSaveTheWorldApp.animal.maxHealth" for="field_maxHealth">Max Health</label>
+                    <input type="number" class="form-control" name="maxHealth" id="field_maxHealth"
+                           formControlName="maxHealth"/>
+                    <div *ngIf="editForm.get('maxHealth').invalid && (editForm.get('maxHealth').dirty || editForm.get('maxHealth').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('maxHealth').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('maxHealth')?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="trickPeopleToSaveTheWorldApp.animal.currentHealth" for="field_currentHealth">Current Health</label>
+                    <input type="number" class="form-control" name="currentHealth" id="field_currentHealth"
+                           formControlName="currentHealth"/>
+                    <div *ngIf="editForm.get('currentHealth').invalid && (editForm.get('currentHealth').dirty || editForm.get('currentHealth').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('currentHealth').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('currentHealth')?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="trickPeopleToSaveTheWorldApp.animal.creationDate" for="field_creationDate">Creation Date</label>
+                    <div class="input-group">
+                        <input id="field_creationDate" type="text" class="form-control" name="creationDate" ngbDatepicker  #creationDateDp="ngbDatepicker" formControlName="creationDate"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="creationDateDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="trickPeopleToSaveTheWorldApp.animal.happiness" for="field_happiness">Happiness</label>
+                    <input type="checkbox" class="form-control" name="happiness" id="field_happiness"
+                           formControlName="happiness"/>
+                    <div *ngIf="editForm.get('happiness').invalid && (editForm.get('happiness').dirty || editForm.get('happiness').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('happiness').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="trickPeopleToSaveTheWorldApp.animal.planet" for="field_planet">Planet</label>
+                    <select class="form-control" id="field_planet" name="planet" formControlName="planet">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="planetOption.id === editForm.get('planet').value?.id ? editForm.get('planet').value : planetOption" *ngFor="let planetOption of planets; trackBy: trackPlanetById">{{planetOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

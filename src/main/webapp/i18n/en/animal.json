@@ -1,0 +1,28 @@
+{
+  "trickPeopleToSaveTheWorldApp": {
+    "animal": {
+      "home": {
+        "title": "Animals",
+        "createLabel": "Create a new Animal",
+        "createOrEditLabel": "Create or edit a Animal",
+        "notFound": "No Animals found"
+      },
+      "created": "A new Animal is created with identifier {{ param }}",
+      "updated": "A Animal is updated with identifier {{ param }}",
+      "deleted": "A Animal is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Animal {{ id }}?"
+      },
+      "detail": {
+        "title": "Animal"
+      },
+      "name": "Name",
+      "animalType": "Animal Type",
+      "maxHealth": "Max Health",
+      "currentHealth": "Current Health",
+      "creationDate": "Creation Date",
+      "happiness": "Happiness",
+      "planet": "Planet"
+    }
+  }
+}

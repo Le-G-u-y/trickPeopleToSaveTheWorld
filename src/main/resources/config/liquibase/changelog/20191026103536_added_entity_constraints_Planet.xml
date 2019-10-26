@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <!--
+        Added the constraints for entity Planet.
+    -->
+    <changeSet id="20191026103536-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="planet_id"
+                                 baseTableName="planet_achievement"
+                                 constraintName="fk_planet_achievement_planet_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="planet"/>
+
+        <addForeignKeyConstraint baseColumnNames="achievement_id"
+                                 baseTableName="planet_achievement"
+                                 constraintName="fk_planet_achievement_achievement_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="achievement"/>
+        
+    </changeSet>
+</databaseChangeLog>

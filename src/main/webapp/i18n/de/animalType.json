@@ -1,0 +1,10 @@
+{
+  "trickPeopleToSaveTheWorldApp": {
+    "AnimalType": {
+      "null": "",
+      "PIG": "PIG",
+      "CHICKEN": "CHICKEN",
+      "COW": "COW"
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "trickPeopleToSaveTheWorldApp": {
+    "planet": {
+      "home": {
+        "title": "Planets",
+        "createLabel": "Planet erstellen",
+        "createOrEditLabel": "Planet erstellen oder bearbeiten",
+        "notFound": "No Planets found"
+      },
+      "created": "Planet erstellt mit ID {{ param }}",
+      "updated": "Planet aktualisiert mit ID {{ param }}",
+      "deleted": "Planet gelöscht mit ID {{ param }}",
+      "delete": {
+        "question": "Soll Planet {{ id }} wirklich dauerhaft gelöscht werden?"
+      },
+      "detail": {
+        "title": "Planet"
+      },
+      "forestPoints": "Forest Points",
+      "waterPoints": "Water Points",
+      "smogPoints": "Smog Points",
+      "animal": "Animal",
+      "achievement": "Achievement"
+    }
+  }
+}

@@ -16,7 +16,8 @@
       "detail": {
         "title": "Achievement"
       },
-      "name": "Name"
+      "name": "Name",
+      "planet": "Planet"
     }
   }
 }
