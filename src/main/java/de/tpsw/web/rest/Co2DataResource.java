@@ -58,18 +58,14 @@ public class Co2DataResource {
 
             Co2Data co2Data = new Co2Data();
             Object co2 = jsonObject.get("co2");
-            if (co2 != null) {
-                co2Data.setCo2Value((Integer) co2);
-            }
             Object hum = jsonObject.get("hum");
-            if (hum != null) {
-                co2Data.setHumidity(((Double) hum).floatValue());
-            }
             Object temp = jsonObject.get("temp");
-            if (temp != null) {
+            if (co2 != null && hum != null && temp != null) {
+                co2Data.setCo2Value((Integer) co2);
+                co2Data.setHumidity(((Double) hum).floatValue());
                 co2Data.setTemp(((Double) temp).floatValue());
+                result = co2DataService.save(co2Data);
             }
-            result = co2DataService.save(co2Data);
         } catch (JSONException e) {
             e.printStackTrace();
         }
