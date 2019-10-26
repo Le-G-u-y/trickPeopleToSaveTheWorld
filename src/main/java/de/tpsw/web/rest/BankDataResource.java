@@ -42,7 +42,7 @@ public class BankDataResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @GetMapping("/banking-data")
-    public void testBankingData() throws URISyntaxException {
+    public void testBankingData() {
         log.debug("REST request to get BankingData ");
         int indexChange = new BankDataEvaluationService().calculateIndexChange();
         log.info("indexChange: "+ indexChange);

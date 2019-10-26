@@ -7,7 +7,7 @@ import java.util.Arrays;
 
 public class BankDataAdapter {
 
-        public ResponseEntity<String>  requestBankData(){
+        public String  requestBankData(){
         String uri = "https://simulator-api.db.com:443/gw/dbapi/banking/transactions/v1/?iban=DE10010000000000005341";
 
         RestTemplate restTemplate = new RestTemplate();
@@ -19,7 +19,7 @@ public class BankDataAdapter {
 
         ResponseEntity<String> result = restTemplate.exchange(uri, HttpMethod.GET, entity, String.class);
         System.out.println(result);
-        return result;
+        return result.getBody();
 
     }
 }
