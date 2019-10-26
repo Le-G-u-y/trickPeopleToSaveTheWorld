@@ -13,7 +13,7 @@ public class ProscheDataAdapter {
 
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-        headers.set("Authorization","Bearer eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlfdmVyc2lvbiI6IjEuMiIsImFwcF9pZCI6Ijk3QTNGNDJBMTI5OTQ3MEYwNUY2QjhCQiIsImF1ZCI6Imh0dHBzOi8vc2FuZGJveC5yZXN0LWFwaS5oaWdoLW1vYmlsaXR5LmNvbS92MiIsImlhdCI6MTU3MjExNTY4MywianRpIjoiZjJiOTI2ZDAtMDJlNy00ODQxLThhNGUtZTdjZTFiMjYwOGQyIiwiYWNjZXNzX3Rva2VuIjoiYjU1YWY5NWEtNjA3Yy00N2U4LWFkMzctNTAxNmE4YmVkYTYxIn0.KkNxb6Sc7fV1J3kumfaHHHt7Nx1GFoC8h7Yf6MQFGCXkUSfIP-RpSDUPUiU9hfS1TyYO0xNlZstnF8Bj5C_F7Q");
+        headers.set("Authorization","Bearer eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlfdmVyc2lvbiI6IjEuMiIsImFwcF9pZCI6Ijk3QTNGNDJBMTI5OTQ3MEYwNUY2QjhCQiIsImF1ZCI6Imh0dHBzOi8vc2FuZGJveC5yZXN0LWFwaS5oaWdoLW1vYmlsaXR5LmNvbS92MiIsImlhdCI6MTU3MjEyMTU2MSwianRpIjoiMjNhZjFkMjgtYjM2Ny00ZjI3LTk5MDItMDJmMzBiODhhOTRhIiwiYWNjZXNzX3Rva2VuIjoiYTQxOGNhNmYtMWZlZS00Y2Q0LWFiNmMtMjcxY2I5ZWQ4YjBiIn0.VrpI4SlxEF63HMk9oE363u-mxwUGbTliPO6jgAMmxjjdK2_G17oWKGYe7wmKn6Vx0HI7I7Nee6EDopThhqtynw");
         HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
 
         ResponseEntity<String> result = restTemplate.exchange(uri, HttpMethod.GET, entity, String.class);
