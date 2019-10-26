@@ -1,5 +1,6 @@
 package de.tpsw.web.rest;
 
+import com.fasterxml.jackson.annotation.JsonRawValue;
 import de.tpsw.domain.Co2Data;
 import de.tpsw.service.Co2DataService;
 import de.tpsw.web.rest.errors.BadRequestAlertException;
@@ -47,15 +48,18 @@ public class Co2DataResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/co-2-data")
-    public ResponseEntity<Co2Data> createCo2Data(@Valid @RequestBody Co2Data co2Data) throws URISyntaxException {
+    public ResponseEntity<Co2Data> createCo2Data(@Valid @RequestBody JsonRawValue co2Data) throws URISyntaxException {
         log.debug("REST request to save Co2Data : {}", co2Data);
-        if (co2Data.getId() != null) {
+
+        /*if (co2Data.getId() != null) {
             throw new BadRequestAlertException("A new co2Data cannot already have an ID", ENTITY_NAME, "idexists");
         }
         Co2Data result = co2DataService.save(co2Data);
         return ResponseEntity.created(new URI("/api/co-2-data/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
+            */
+        return null;
     }
 
     /**
