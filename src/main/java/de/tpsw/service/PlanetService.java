@@ -2,6 +2,7 @@ package de.tpsw.service;
 
 import de.tpsw.domain.Animal;
 import de.tpsw.domain.Planet;
+import de.tpsw.domain.enumeration.AnimalType;
 import de.tpsw.repository.PlanetRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -60,7 +62,41 @@ public class PlanetService {
         // vegan:       +3
         // vegetarian:  +1
         // meeat:       -1
+        // as soon as current victim is full, add health to baby.
+        // as soon as babys health is full, create a new animal!
         Animal currentVictim = planet.getCurrentVictimAnimal();
+        Integer healthDiff = calculateHealthDiff(dietType);
+
+        // increase or decrease victim's health
+        // Victim dead? => UI will inform the user
+        Integer healthOverflow = currentVictim.alterHealth(healthDiff);
+
+        // Add health (positive) overflow to upcoming baby
+        Animal nextBaby = planet.getNextBabyAnimal();
+        nextBaby.alterHealth(healthOverflow);
+
+        if(nextBaby.isHealthFull()){
+            // baby is now adult! it part of the normal animals now
+            planet.getAnimals().add(nextBaby);
+
+            // a new baby is born!! create new animal object
+            Animal brandNewBaby = new Animal();
+            brandNewBaby.setName("BABY");
+            brandNewBaby.setAnimalType(AnimalType.getRandomAnimalType());
+            brandNewBaby.setCurrentHealth(1);
+            brandNewBaby.setMaxHealth(5);
+            brandNewBaby.setCreationDate(LocalDate.now());
+            brandNewBaby.setHappiness(true);
+            brandNewBaby.setDeathNotified(false);
+            brandNewBaby.setPlanet(planet);
+
+            planet.setNextBabyAnimal(brandNewBaby);
+        }
+
+        return planetRepository.save(planet);
+    }
+
+    private Integer calculateHealthDiff(Integer dietType) {
         Integer healthDiff;
 
         if(DIET_VEGAN.equals(dietType)){
@@ -75,11 +111,7 @@ public class PlanetService {
             //HACK
             healthDiff = 0;
         }
-        currentVictim.setCurrentHealth(currentVictim.getCurrentHealth() + healthDiff);
-
-        // Victim dead? => UI will inform the user
-
-        return planetRepository.save(planet);
+        return healthDiff;
     }
 
     /**
