@@ -25,6 +25,7 @@
             <th scope="col" ><span jhiTranslate="trickPeopleToSaveTheWorldApp.animal.currentHealth">Current Health</span></th>
             <th scope="col" ><span jhiTranslate="trickPeopleToSaveTheWorldApp.animal.creationDate">Creation Date</span></th>
             <th scope="col" ><span jhiTranslate="trickPeopleToSaveTheWorldApp.animal.happiness">Happiness</span></th>
+            <th scope="col" ><span jhiTranslate="trickPeopleToSaveTheWorldApp.animal.deathNotified">Death Notified</span></th>
             <th scope="col" ><span jhiTranslate="trickPeopleToSaveTheWorldApp.animal.planet">Planet</span></th>
             <th scope="col"></th>
             </tr>
@@ -38,6 +39,7 @@
                 <td>{{animal.currentHealth}}</td>
                 <td>{{animal.creationDate | date:'mediumDate'}}</td>
                 <td>{{animal.happiness}}</td>
+                <td>{{animal.deathNotified}}</td>
                 <td>
                     <div *ngIf="animal.planet">
                         <a [routerLink]="['/planet', animal.planet?.id, 'view' ]" >{{animal.planet?.id}}</a>

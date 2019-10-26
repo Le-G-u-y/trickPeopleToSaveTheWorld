@@ -49,6 +49,9 @@ public class Animal implements Serializable {
     @Column(name = "happiness", nullable = false)
     private Boolean happiness;
 
+    @Column(name = "death_notified")
+    private Boolean deathNotified;
+
     @ManyToOne
     @JsonIgnoreProperties("animals")
     private Planet planet;
@@ -140,6 +143,19 @@ public class Animal implements Serializable {
         this.happiness = happiness;
     }
 
+    public Boolean isDeathNotified() {
+        return deathNotified;
+    }
+
+    public Animal deathNotified(Boolean deathNotified) {
+        this.deathNotified = deathNotified;
+        return this;
+    }
+
+    public void setDeathNotified(Boolean deathNotified) {
+        this.deathNotified = deathNotified;
+    }
+
     public Planet getPlanet() {
         return planet;
     }
@@ -180,6 +196,7 @@ public class Animal implements Serializable {
             ", currentHealth=" + getCurrentHealth() +
             ", creationDate='" + getCreationDate() + "'" +
             ", happiness='" + isHappiness() + "'" +
+            ", deathNotified='" + isDeathNotified() + "'" +
             "}";
     }
 }
