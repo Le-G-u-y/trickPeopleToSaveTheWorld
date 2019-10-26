@@ -55,6 +55,9 @@ public class AnimalResourceIT {
     private static final Boolean DEFAULT_HAPPINESS = false;
     private static final Boolean UPDATED_HAPPINESS = true;
 
+    private static final Boolean DEFAULT_DEATH_NOTIFIED = false;
+    private static final Boolean UPDATED_DEATH_NOTIFIED = true;
+
     @Autowired
     private AnimalRepository animalRepository;
 
@@ -105,7 +108,8 @@ public class AnimalResourceIT {
             .maxHealth(DEFAULT_MAX_HEALTH)
             .currentHealth(DEFAULT_CURRENT_HEALTH)
             .creationDate(DEFAULT_CREATION_DATE)
-            .happiness(DEFAULT_HAPPINESS);
+            .happiness(DEFAULT_HAPPINESS)
+            .deathNotified(DEFAULT_DEATH_NOTIFIED);
         return animal;
     }
     /**
@@ -121,7 +125,8 @@ public class AnimalResourceIT {
             .maxHealth(UPDATED_MAX_HEALTH)
             .currentHealth(UPDATED_CURRENT_HEALTH)
             .creationDate(UPDATED_CREATION_DATE)
-            .happiness(UPDATED_HAPPINESS);
+            .happiness(UPDATED_HAPPINESS)
+            .deathNotified(UPDATED_DEATH_NOTIFIED);
         return animal;
     }
 
@@ -151,6 +156,7 @@ public class AnimalResourceIT {
         assertThat(testAnimal.getCurrentHealth()).isEqualTo(DEFAULT_CURRENT_HEALTH);
         assertThat(testAnimal.getCreationDate()).isEqualTo(DEFAULT_CREATION_DATE);
         assertThat(testAnimal.isHappiness()).isEqualTo(DEFAULT_HAPPINESS);
+        assertThat(testAnimal.isDeathNotified()).isEqualTo(DEFAULT_DEATH_NOTIFIED);
     }
 
     @Test
@@ -261,7 +267,8 @@ public class AnimalResourceIT {
             .andExpect(jsonPath("$.[*].maxHealth").value(hasItem(DEFAULT_MAX_HEALTH)))
             .andExpect(jsonPath("$.[*].currentHealth").value(hasItem(DEFAULT_CURRENT_HEALTH)))
             .andExpect(jsonPath("$.[*].creationDate").value(hasItem(DEFAULT_CREATION_DATE.toString())))
-            .andExpect(jsonPath("$.[*].happiness").value(hasItem(DEFAULT_HAPPINESS.booleanValue())));
+            .andExpect(jsonPath("$.[*].happiness").value(hasItem(DEFAULT_HAPPINESS.booleanValue())))
+            .andExpect(jsonPath("$.[*].deathNotified").value(hasItem(DEFAULT_DEATH_NOTIFIED.booleanValue())));
     }
     
     @Test
@@ -280,7 +287,8 @@ public class AnimalResourceIT {
             .andExpect(jsonPath("$.maxHealth").value(DEFAULT_MAX_HEALTH))
             .andExpect(jsonPath("$.currentHealth").value(DEFAULT_CURRENT_HEALTH))
             .andExpect(jsonPath("$.creationDate").value(DEFAULT_CREATION_DATE.toString()))
-            .andExpect(jsonPath("$.happiness").value(DEFAULT_HAPPINESS.booleanValue()));
+            .andExpect(jsonPath("$.happiness").value(DEFAULT_HAPPINESS.booleanValue()))
+            .andExpect(jsonPath("$.deathNotified").value(DEFAULT_DEATH_NOTIFIED.booleanValue()));
     }
 
     @Test
@@ -309,7 +317,8 @@ public class AnimalResourceIT {
             .maxHealth(UPDATED_MAX_HEALTH)
             .currentHealth(UPDATED_CURRENT_HEALTH)
             .creationDate(UPDATED_CREATION_DATE)
-            .happiness(UPDATED_HAPPINESS);
+            .happiness(UPDATED_HAPPINESS)
+            .deathNotified(UPDATED_DEATH_NOTIFIED);
 
         restAnimalMockMvc.perform(put("/api/animals")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -326,6 +335,7 @@ public class AnimalResourceIT {
         assertThat(testAnimal.getCurrentHealth()).isEqualTo(UPDATED_CURRENT_HEALTH);
         assertThat(testAnimal.getCreationDate()).isEqualTo(UPDATED_CREATION_DATE);
         assertThat(testAnimal.isHappiness()).isEqualTo(UPDATED_HAPPINESS);
+        assertThat(testAnimal.isDeathNotified()).isEqualTo(UPDATED_DEATH_NOTIFIED);
     }
 
     @Test

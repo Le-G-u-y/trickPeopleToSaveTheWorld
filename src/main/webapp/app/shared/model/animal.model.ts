@@ -10,6 +10,7 @@ export interface IAnimal {
   currentHealth?: number;
   creationDate?: Moment;
   happiness?: boolean;
+  deathNotified?: boolean;
   planet?: IPlanet;
 }
 
@@ -22,8 +23,10 @@ export class Animal implements IAnimal {
     public currentHealth?: number,
     public creationDate?: Moment,
     public happiness?: boolean,
+    public deathNotified?: boolean,
     public planet?: IPlanet
   ) {
     this.happiness = this.happiness || false;
+    this.deathNotified = this.deathNotified || false;
   }
 }

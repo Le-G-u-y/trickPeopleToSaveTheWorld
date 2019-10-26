@@ -37,6 +37,10 @@
             "fieldValidateRules": [
                 "required"
             ]
+        },
+        {
+            "fieldName": "deathNotified",
+            "fieldType": "Boolean"
         }
     ],
     "relationships": [
