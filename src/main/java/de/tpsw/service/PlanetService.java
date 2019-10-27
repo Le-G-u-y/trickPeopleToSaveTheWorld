@@ -60,7 +60,7 @@ public class PlanetService {
         log.debug("Request to save Planet : {} and dietType: {}", planetId, dietType);
 
         // Get current victim
-        Planet planet = findOne(planetId).get();
+        Planet planet =  planetRepository.findById(planetId).get();
 
         // Calculate conseuqences on victim animal
         // vegan:       +3
@@ -103,11 +103,13 @@ public class PlanetService {
     private Integer calculateHealthDiff(Integer dietType) {
         Integer healthDiff;
 
-        if (DIET_VEGAN.equals(dietType)) {
+        if(DIET_VEGAN.equals(dietType)){
             healthDiff = 3;
-        } else if (DIET_VEGETARIAN.equals(dietType)) {
+        }
+        else if(DIET_VEGETARIAN.equals(dietType)){
             healthDiff = 1;
-        } else if (DIET_MEAT.equals(dietType)) {
+        }
+        else if(DIET_MEAT.equals(dietType)){
             healthDiff = -1;
         } else {
             //HACK
@@ -152,6 +154,7 @@ public class PlanetService {
             long forestScore = calculateForest(planet.getForestPoints());
             planet.setForestPoints(forestScore);
         }
+
         return optionalPlanet;
     }
 
@@ -188,9 +191,9 @@ public class PlanetService {
                         }
                     }
                 }
-
             }
         }
         return score;
     }
+
 }
