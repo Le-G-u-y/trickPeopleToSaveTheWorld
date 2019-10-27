@@ -109,7 +109,9 @@ public class EventResource {
         List<Event> events = eventService.findAll();
 
         if(events != null && !events.isEmpty()){
-            return events.get(0);
+            Event resultEvent = events.get(0);
+            eventService.delete(resultEvent.getId());
+            return resultEvent;
         } else {
             return null;
         }
