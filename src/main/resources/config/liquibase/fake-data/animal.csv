@@ -1,5 +1,11 @@
 id;name;animal_type;max_health;current_health;creation_date;happiness;death_notified
-1;Emma;COW;5;5;2019-10-26;true;false
-2;Jumpy;CHICKEN;5;5;2019-10-25;true;false
-3;Haribart;PIG;5;5;2019-10-26;true;false
-4;Grunty;PIG;2;5;2019-10-26;false;false
+1;monitor 1080p Checking Account;CHICKEN;62329;44945;2019-10-26;false;false
+2;moratorium moratorium;PIG;38292;11959;2019-10-26;true;true
+3;hard drive Robust Networked;CHICKEN;42754;11089;2019-10-27;false;false
+4;Outdoors;COW;69551;90756;2019-10-27;false;true
+5;Saint Lucia white;PIG;92969;62435;2019-10-26;false;true
+6;RSS;PIG;32434;80744;2019-10-27;true;false
+7;Direct;COW;42710;52;2019-10-26;false;true
+8;Games;CHICKEN;69243;11986;2019-10-27;false;false
+9;Gloves sky blue Oklahoma;COW;96244;24687;2019-10-27;true;false
+10;capability zero tolerance Computers;COW;3305;27864;2019-10-26;true;true

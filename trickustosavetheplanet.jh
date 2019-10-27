@@ -6,12 +6,29 @@ enum AnimalType {
     COW
 }
 
+enum EventType {
+    ANIMAL_BORN,
+    ANIMAL_DIED,
+    AIR_CLEANED,
+    AIR_POLLUTED,
+    FOREST_SAVED,
+    FOREST_DESTROYED,
+    WATER_CLEANED,
+    WATER_POLLUTED,
+    DAILY_QUESTION
+}
+
 // --------------------------------------
 // ENTITIES
 // --------------------------------------
 
 entity Achievement {
 	name String required
+}
+
+entity Event {
+	eventType EventType required,
+    eventValue String
 }
 
 entity Animal {

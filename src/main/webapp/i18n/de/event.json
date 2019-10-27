@@ -1,0 +1,23 @@
+{
+  "trickPeopleToSaveTheWorldApp": {
+    "event": {
+      "home": {
+        "title": "Events",
+        "createLabel": "Event erstellen",
+        "createOrEditLabel": "Event erstellen oder bearbeiten",
+        "notFound": "No Events found"
+      },
+      "created": "Event erstellt mit ID {{ param }}",
+      "updated": "Event aktualisiert mit ID {{ param }}",
+      "deleted": "Event gelöscht mit ID {{ param }}",
+      "delete": {
+        "question": "Soll Event {{ id }} wirklich dauerhaft gelöscht werden?"
+      },
+      "detail": {
+        "title": "Event"
+      },
+      "eventType": "Event Type",
+      "eventValue": "Event Value"
+    }
+  }
+}

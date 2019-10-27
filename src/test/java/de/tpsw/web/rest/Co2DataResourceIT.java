@@ -119,7 +119,26 @@ public class Co2DataResourceIT {
         co2Data = createEntity(em);
     }
 
+    @Test
+    @Transactional
+    public void createCo2Data() throws Exception {
+        int databaseSizeBeforeCreate = co2DataRepository.findAll().size();
 
+        // Create the Co2Data
+        restCo2DataMockMvc.perform(post("/api/co-2-data")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(co2Data)))
+            .andExpect(status().isCreated());
+
+        // Validate the Co2Data in the database
+        List<Co2Data> co2DataList = co2DataRepository.findAll();
+        assertThat(co2DataList).hasSize(databaseSizeBeforeCreate + 1);
+        Co2Data testCo2Data = co2DataList.get(co2DataList.size() - 1);
+        assertThat(testCo2Data.getTimestamp()).isEqualTo(DEFAULT_TIMESTAMP);
+        assertThat(testCo2Data.getCo2Value()).isEqualTo(DEFAULT_CO_2_VALUE);
+        assertThat(testCo2Data.getTemp()).isEqualTo(DEFAULT_TEMP);
+        assertThat(testCo2Data.getHumidity()).isEqualTo(DEFAULT_HUMIDITY);
+    }
 
     @Test
     @Transactional
@@ -211,7 +230,7 @@ public class Co2DataResourceIT {
             .andExpect(jsonPath("$.[*].temp").value(hasItem(DEFAULT_TEMP.doubleValue())))
             .andExpect(jsonPath("$.[*].humidity").value(hasItem(DEFAULT_HUMIDITY.doubleValue())));
     }
-
+    
     @Test
     @Transactional
     public void getCo2Data() throws Exception {
