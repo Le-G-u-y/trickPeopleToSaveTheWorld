@@ -60,7 +60,7 @@ public class PlanetService {
         log.debug("Request to save Planet : {} and dietType: {}", planetId, dietType);
 
         // Get current victim
-        Planet planet =  findOne(planetId).get();
+        Planet planet = findOne(planetId).get();
 
         // Calculate conseuqences on victim animal
         // vegan:       +3
@@ -79,7 +79,7 @@ public class PlanetService {
         Animal nextBaby = planet.getNextBabyAnimal();
         nextBaby.alterHealth(healthOverflow);
 
-        if(nextBaby.checkIsHealthFull()){
+        if (nextBaby.checkIsHealthFull()) {
             // baby is now adult! it part of the normal animals now
             planet.getAnimals().add(nextBaby);
 
@@ -103,13 +103,11 @@ public class PlanetService {
     private Integer calculateHealthDiff(Integer dietType) {
         Integer healthDiff;
 
-        if(DIET_VEGAN.equals(dietType)){
+        if (DIET_VEGAN.equals(dietType)) {
             healthDiff = 3;
-        }
-        else if(DIET_VEGETARIAN.equals(dietType)){
+        } else if (DIET_VEGETARIAN.equals(dietType)) {
             healthDiff = 1;
-        }
-        else if(DIET_MEAT.equals(dietType)){
+        } else if (DIET_MEAT.equals(dietType)) {
             healthDiff = -1;
         } else {
             //HACK
@@ -149,12 +147,11 @@ public class PlanetService {
     public Optional<Planet> findOne(Long id) {
         log.debug("Request to get Planet : {}", id);
         Optional<Planet> optionalPlanet = planetRepository.findOneWithEagerRelationships(id);
-        if(optionalPlanet.isPresent()){
+        if (optionalPlanet.isPresent()) {
             Planet planet = optionalPlanet.get();
-            long forestScore = calculateForest();
+            long forestScore = calculateForest(planet.getForestPoints());
             planet.setForestPoints(forestScore);
         }
-
         return optionalPlanet;
     }
 
@@ -168,26 +165,32 @@ public class PlanetService {
         planetRepository.deleteById(id);
     }
 
-    private int calculateForest(){
-        List<LightingData> allLightingData = lightingDataRepository.findAll();
-        int score = 0;
-        for (LightingData lightingData : allLightingData) {
-            long onTime = lightingData.getOnSeconds();
-            long offTime = lightingData.getOffSeconds();
-            if (onTime > offTime) {
-                score--;
-            } else {
-                score++;
-            }
-            if (score > 100) {
-                score = 100;
-            } else {
-                if (score < 0) {
-                    score = 0;
+    private long calculateForest(long forestScoreOld) {
+        long score = forestScoreOld;
+        if (lightingDataRepository != null) {
+            List<LightingData> allLightingData = lightingDataRepository.findAll();
+            if (allLightingData != null) {
+                for (LightingData lightingData : allLightingData) {
+                    if (lightingData != null) {
+                        long onTime = lightingData.getOnSeconds();
+                        long offTime = lightingData.getOffSeconds();
+                        if (onTime > offTime) {
+                            score--;
+                        } else {
+                            score++;
+                        }
+                        if (score > 100) {
+                            score = 100;
+                        } else {
+                            if (score < 0) {
+                                score = 0;
+                            }
+                        }
+                    }
                 }
+
             }
         }
         return score;
     }
-
 }
