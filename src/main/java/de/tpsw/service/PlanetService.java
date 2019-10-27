@@ -60,7 +60,7 @@ public class PlanetService {
         log.debug("Request to save Planet : {} and dietType: {}", planetId, dietType);
 
         // Get current victim
-        Planet planet =  findOne(planetId).get();
+        Planet planet =  planetRepository.findById(planetId).get();
 
         // Calculate conseuqences on victim animal
         // vegan:       +3
