@@ -23,6 +23,10 @@ import { RouterModule } from '@angular/router';
       {
         path: 'co-2-data',
         loadChildren: () => import('./co-2-data/co-2-data.module').then(m => m.TrickPeopleToSaveTheWorldCo2DataModule)
+      },
+      {
+        path: 'event',
+        loadChildren: () => import('./event/event.module').then(m => m.TrickPeopleToSaveTheWorldEventModule)
       }
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ])

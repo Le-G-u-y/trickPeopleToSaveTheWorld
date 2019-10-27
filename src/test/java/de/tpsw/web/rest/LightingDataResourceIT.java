@@ -107,6 +107,24 @@ public class LightingDataResourceIT {
         lightingData = createEntity(em);
     }
 
+    @Test
+    @Transactional
+    public void createLightingData() throws Exception {
+        int databaseSizeBeforeCreate = lightingDataRepository.findAll().size();
+
+        // Create the LightingData
+        restLightingDataMockMvc.perform(post("/api/lighting-data")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(lightingData)))
+            .andExpect(status().isCreated());
+
+        // Validate the LightingData in the database
+        List<LightingData> lightingDataList = lightingDataRepository.findAll();
+        assertThat(lightingDataList).hasSize(databaseSizeBeforeCreate + 1);
+        LightingData testLightingData = lightingDataList.get(lightingDataList.size() - 1);
+        assertThat(testLightingData.getOnSeconds()).isEqualTo(DEFAULT_ON_SECONDS);
+        assertThat(testLightingData.getOffSeconds()).isEqualTo(DEFAULT_OFF_SECONDS);
+    }
 
     @Test
     @Transactional
@@ -142,7 +160,7 @@ public class LightingDataResourceIT {
             .andExpect(jsonPath("$.[*].onSeconds").value(hasItem(DEFAULT_ON_SECONDS.intValue())))
             .andExpect(jsonPath("$.[*].offSeconds").value(hasItem(DEFAULT_OFF_SECONDS.intValue())));
     }
-
+    
     @Test
     @Transactional
     public void getLightingData() throws Exception {
