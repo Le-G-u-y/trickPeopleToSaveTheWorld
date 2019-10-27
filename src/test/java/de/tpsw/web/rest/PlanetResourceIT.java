@@ -232,7 +232,7 @@ public class PlanetResourceIT {
             .andExpect(jsonPath("$.[*].waterPoints").value(hasItem(DEFAULT_WATER_POINTS.intValue())))
             .andExpect(jsonPath("$.[*].smogPoints").value(hasItem(DEFAULT_SMOG_POINTS.intValue())));
     }
-    
+
     @SuppressWarnings({"unchecked"})
     public void getAllPlanetsWithEagerRelationshipsIsEnabled() throws Exception {
         PlanetResource planetResource = new PlanetResource(planetServiceMock);
@@ -266,21 +266,6 @@ public class PlanetResourceIT {
             verify(planetServiceMock, times(1)).findAllWithEagerRelationships(any());
     }
 
-    @Test
-    @Transactional
-    public void getPlanet() throws Exception {
-        // Initialize the database
-        planetRepository.saveAndFlush(planet);
-
-        // Get the planet
-        restPlanetMockMvc.perform(get("/api/planets/{id}", planet.getId()))
-            .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-            .andExpect(jsonPath("$.id").value(planet.getId().intValue()))
-            .andExpect(jsonPath("$.forestPoints").value(DEFAULT_FOREST_POINTS.intValue()))
-            .andExpect(jsonPath("$.waterPoints").value(DEFAULT_WATER_POINTS.intValue()))
-            .andExpect(jsonPath("$.smogPoints").value(DEFAULT_SMOG_POINTS.intValue()));
-    }
 
     @Test
     @Transactional

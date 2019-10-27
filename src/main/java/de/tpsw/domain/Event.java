@@ -13,7 +13,7 @@ import de.tpsw.domain.enumeration.EventType;
  * A Event.
  */
 @Entity
-@Table(name = "event")
+@Table(name = "planet_event")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Event implements Serializable {
 
