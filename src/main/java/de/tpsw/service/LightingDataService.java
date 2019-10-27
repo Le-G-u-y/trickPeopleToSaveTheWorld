@@ -45,7 +45,25 @@ public class LightingDataService {
     @Transactional(readOnly = true)
     public List<LightingData> findAll() {
         log.debug("Request to get all LightingData");
-        return lightingDataRepository.findAll();
+        List<LightingData> allLightingData = lightingDataRepository.findAll();
+        int score = 0;
+        for (LightingData lightingData : allLightingData) {
+            long onTime = lightingData.getOnSeconds();
+            long offTime = lightingData.getOffSeconds();
+            if (onTime > offTime) {
+                score--;
+            } else {
+                score++;
+            }
+            if (score > 100) {
+                score = 100;
+            } else {
+                if (score < 0) {
+                    score = 0;
+                }
+            }
+        }
+        return allLightingData;
     }
 
 
