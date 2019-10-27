@@ -1,12 +1,14 @@
 package de.tpsw.service;
 
 import de.tpsw.domain.Animal;
+import de.tpsw.domain.LightingData;
 import de.tpsw.domain.Planet;
 import de.tpsw.domain.enumeration.AnimalType;
+import de.tpsw.repository.LightingDataRepository;
 import de.tpsw.repository.PlanetRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -26,12 +28,11 @@ public class PlanetService {
     private final Logger log = LoggerFactory.getLogger(PlanetService.class);
 
     private final PlanetRepository planetRepository;
+    private final LightingDataRepository lightingDataRepository;
 
-    @Autowired
-    private AnimalService animalService;
-
-    public PlanetService(PlanetRepository planetRepository) {
+    public PlanetService(PlanetRepository planetRepository, LightingDataRepository lightingDataRepository) {
         this.planetRepository = planetRepository;
+        this.lightingDataRepository = lightingDataRepository;
     }
 
     final static Integer DIET_VEGAN = 0;
@@ -73,7 +74,6 @@ public class PlanetService {
         // increase or decrease victim's health
         // Victim dead? => UI will inform the user
         Integer healthOverflow = currentVictim.alterHealth(healthDiff);
-        animalService.save(currentVictim);
 
         // Add health (positive) overflow to upcoming baby
         Animal nextBaby = planet.getNextBabyAnimal();
@@ -92,10 +92,7 @@ public class PlanetService {
             brandNewBaby.setCreationDate(LocalDate.now());
             brandNewBaby.setHappiness(true);
             brandNewBaby.setDeathNotified(false);
-            // brandNewBaby.setPlanet(planet);
-
-            // persist
-            animalService.save(brandNewBaby);
+            brandNewBaby.setPlanet(planet);
 
             planet.setNextBabyAnimal(brandNewBaby);
         }
@@ -151,7 +148,14 @@ public class PlanetService {
     @Transactional(readOnly = true)
     public Optional<Planet> findOne(Long id) {
         log.debug("Request to get Planet : {}", id);
-        return planetRepository.findOneWithEagerRelationships(id);
+        Optional<Planet> optionalPlanet = planetRepository.findOneWithEagerRelationships(id);
+        if(optionalPlanet.isPresent()){
+            Planet planet = optionalPlanet.get();
+            long forestScore = calculateForest();
+            planet.setForestPoints(forestScore);
+        }
+
+        return optionalPlanet;
     }
 
     /**
@@ -164,5 +168,26 @@ public class PlanetService {
         planetRepository.deleteById(id);
     }
 
+    private int calculateForest(){
+        List<LightingData> allLightingData = lightingDataRepository.findAll();
+        int score = 0;
+        for (LightingData lightingData : allLightingData) {
+            long onTime = lightingData.getOnSeconds();
+            long offTime = lightingData.getOffSeconds();
+            if (onTime > offTime) {
+                score--;
+            } else {
+                score++;
+            }
+            if (score > 100) {
+                score = 100;
+            } else {
+                if (score < 0) {
+                    score = 0;
+                }
+            }
+        }
+        return score;
+    }
 
 }
