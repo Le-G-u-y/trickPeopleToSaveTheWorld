@@ -103,6 +103,18 @@ public class EventResource {
         return ResponseUtil.wrapOrNotFound(event);
     }
 
+    @GetMapping("/events/next")
+    public Event getNextEvent() {
+        log.debug("REST request to get next Event.");
+        List<Event> events = eventService.findAll();
+
+        if(events != null && !events.isEmpty()){
+            return events.get(0);
+        } else {
+            return null;
+        }
+    }
+
     /**
      * {@code DELETE  /events/:id} : delete the "id" event.
      *
