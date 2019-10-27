@@ -2,6 +2,7 @@ package de.tpsw.web.rest;
 
 import de.tpsw.domain.LightingData;
 import de.tpsw.repository.LightingDataRepository;
+import de.tpsw.service.BankDataEvaluationService;
 import de.tpsw.service.LightingDataService;
 import de.tpsw.web.rest.errors.BadRequestAlertException;
 
@@ -129,5 +130,13 @@ public class LightingDataResource {
         log.debug("REST request to delete LightingData : {}", id);
         lightingDataService.delete(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
+    }
+
+    @GetMapping("/banking-data")
+    public void testBankingData() {
+        log.debug("REST request to get BankingData ");
+        int indexChange = new BankDataEvaluationService().calculateIndexChange();
+        log.info("indexChange: "+ indexChange);
+
     }
 }
