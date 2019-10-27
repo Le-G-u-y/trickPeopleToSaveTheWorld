@@ -178,9 +178,9 @@ public class PlanetService {
                         long onTime = lightingData.getOnSeconds();
                         long offTime = lightingData.getOffSeconds();
                         if (onTime > offTime) {
-                            score--;
+                            score = score - 10;
                         } else {
-                            score++;
+                            score = score + 10;
                         }
                         if (score > 100) {
                             score = 100;
