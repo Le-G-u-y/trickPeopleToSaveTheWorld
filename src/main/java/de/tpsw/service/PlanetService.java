@@ -175,8 +175,8 @@ public class PlanetService {
             if (allLightingData != null) {
                 for (LightingData lightingData : allLightingData) {
                     if (lightingData != null) {
-                        long onTime = lightingData.getOnSeconds();
-                        long offTime = lightingData.getOffSeconds();
+                        long onTime = lightingData.getOnSeconds() !=null? lightingData.getOnSeconds().longValue():0;
+                        long offTime = lightingData.getOffSeconds() != null ? lightingData.getOffSeconds().longValue():0;
                         if (onTime > offTime) {
                             score = score - 10;
                         } else {
